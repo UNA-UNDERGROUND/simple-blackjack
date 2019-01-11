@@ -6,7 +6,7 @@
         {
             "label": "compilar (debug)",
             "type": "shell",
-            "command": "build.sh",
+            "command": "./build.sh",
             "args": [
                 "debug"
             ],
@@ -18,7 +18,7 @@
         {
             "label": "compilar (release)",
             "type": "shell",
-            "command": "build.sh",
+            "command": "./build.sh",
             "args": [
                 "release"
             ]
@@ -26,7 +26,7 @@
         {
             "label": "configurar (debug)",
             "type": "shell",
-            "command": "build.sh",
+            "command": "./build.sh",
             "args": [
                 "debug"
             ]
@@ -34,7 +34,7 @@
         {
             "label": "configurar (release)",
             "type": "shell",
-            "command": "build.sh",
+            "command": "./build.sh",
             "args": [
                 "release"
             ]
@@ -42,7 +42,7 @@
         {
             "label": "limpiar",
             "type": "shell",
-            "command": "clean.sh"
+            "command": "./clean.sh"
         }
     ]
 }

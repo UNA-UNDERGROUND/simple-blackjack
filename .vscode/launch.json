@@ -8,7 +8,7 @@
             "type": "lldb",
             "request": "launch",
             "name": "Debug",
-            "program": "${workspaceFolder}/install/debug/$BlackJack",
+            "program": "${workspaceFolder}/install/debug/BlackJack",
             "args": [],
             "cwd": "${workspaceFolder}",
             "preLaunchTask": "compilar (debug)"
