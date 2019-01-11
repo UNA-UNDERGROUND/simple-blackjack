@@ -42,7 +42,8 @@
         {
             "label": "limpiar",
             "type": "shell",
-            "command": "./clean.sh"
+            "command": "./clean.sh",
+            "problemMatcher": []
         }
     ]
 }
