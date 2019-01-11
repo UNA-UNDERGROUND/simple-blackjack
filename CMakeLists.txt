@@ -8,7 +8,15 @@ project (BlackJack)
 set(CMAKE_CXX_STANDARD 14)
 
 set(src 
-source/source.cpp
+    source/source.cpp
+    source/nodo.cpp
+    source/lista.cpp
+    source/mano.cpp
+    source/mazo.cpp
+    source/carta.cpp
+    source/jugador.cpp
+    source/dealer.cpp
+    source/jugadorGenerico.cpp
 )
 
 add_executable(${PROJECT_NAME} ${src})

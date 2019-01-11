@@ -7,7 +7,7 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug",
+            "name": "Depuracion (lldb)",
             "program": "${workspaceFolder}/install/debug/BlackJack",
             "args": [],
             "cwd": "${workspaceFolder}",
