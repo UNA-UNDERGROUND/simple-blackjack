@@ -1,3 +1,0 @@
-/home/jonathan/Desktop/proyecto-2 blackjack/build/release/CMakeFiles/rebuild_cache.dir
-/home/jonathan/Desktop/proyecto-2 blackjack/build/release/CMakeFiles/Blackjack.dir
-/home/jonathan/Desktop/proyecto-2 blackjack/build/release/CMakeFiles/edit_cache.dir
