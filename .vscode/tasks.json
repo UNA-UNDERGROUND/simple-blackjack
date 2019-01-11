@@ -26,7 +26,7 @@
         {
             "label": "configurar (debug)",
             "type": "shell",
-            "command": "./build.sh",
+            "command": "./setup.sh",
             "args": [
                 "debug"
             ]
@@ -34,7 +34,7 @@
         {
             "label": "configurar (release)",
             "type": "shell",
-            "command": "./build.sh",
+            "command": "./setup.sh",
             "args": [
                 "release"
             ]
