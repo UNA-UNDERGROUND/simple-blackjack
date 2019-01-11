@@ -34,7 +34,7 @@ if [ $eleccion = "release" ] || [ $eleccion = "debug" ]; then
 
   fi
 
-  if [ ! -f Blackjack ]; then
+  if [ ! -f BlackJack ]; then
       printf "no se ha encontrado el ejecutable!\n"
       exit 1
   else
@@ -44,7 +44,7 @@ if [ $eleccion = "release" ] || [ $eleccion = "debug" ]; then
     mkdir ../../install/$eleccion
   fi
 
-  cp Blackjack ../../install/$eleccion/Blackjack
+  cp BlackJack ../../install/$eleccion/BlackJack
   cd ../../install/$eleccion
 
 fi
