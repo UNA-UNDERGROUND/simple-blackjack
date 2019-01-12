@@ -1,3 +1,4 @@
+#pragma once
 // En el juego se utiliza una baraja inglesa de 52 cartas. 
 // Las 52 cartas se dividen en 4 palos 
 // 2 de color rojo y 2 de color negro
