@@ -4,6 +4,7 @@
 nodoCarta::nodoCarta(carta &ref){
     //copiaremos la carta
     actual=new carta(ref);
+    siguiente=nullptr;
 }
 void nodoCarta::setSiguiente(nodoCarta *siguiente){
     this->siguiente = siguiente;
