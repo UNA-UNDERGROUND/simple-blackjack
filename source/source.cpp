@@ -1,14 +1,21 @@
 #include <iostream>
-
+#include "mazo.h"
 
 using std::cout;
 using std::cin;
 using std::string;
 using std::endl;
 
+
+
 int main(int argc, char const *argv[]){
 
-    cout << "hola mundo" << endl;
+    mazo m;
+
+    m.inicializar();
+    m.barajar();
+
+
     cin.ignore();
     return 0;
 }

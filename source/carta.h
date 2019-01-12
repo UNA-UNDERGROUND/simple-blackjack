@@ -1,21 +1,18 @@
-
-
-
 class carta{
-protected:
-int valor;
-int palo;
-bool bocaAbajo;
+private:
+    int codigo;
+    int palo;
+    bool bocaAbajo;
 
 
 public:
     carta();
-    carta(int valor,int palo,bool bocaAbajo);
+    carta(int codigo,int palo,bool bocaAbajo);
     carta(carta & ref);
     
     void voltear();
 
-    int getValor();
+    int getcodigo();
     int getPalo();
     
     ~carta();

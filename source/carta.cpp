@@ -1,25 +1,27 @@
 #include "carta.h"
 
+
+
 carta::carta(){
-    valor = 0;
+    codigo = 0;
     palo = 0;
     bocaAbajo = true;
 }
 
-carta::carta(int valor,int palo,bool bocaAbajo){
-    this->valor = valor;
+carta::carta(int codigo,int palo,bool bocaAbajo){
+    this->codigo = codigo;
     this->palo = palo;
     this->bocaAbajo = bocaAbajo;
 }
 carta::carta(carta &ref){
-    this->valor = ref.valor;
+    this->codigo = ref.codigo;
     this->palo = ref.palo;
     this->bocaAbajo = ref.bocaAbajo;
 }
 
 
-int carta::getValor(){
-    return valor;
+int carta::getcodigo(){
+    return codigo;
 }
 int carta::getPalo(){
     return palo;
@@ -29,6 +31,5 @@ void carta::voltear(){
 }
 
 
-carta::~carta()
-{
+carta::~carta(){
 }
