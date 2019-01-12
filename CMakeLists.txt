@@ -9,8 +9,10 @@ set(CMAKE_CXX_STANDARD 14)
 
 set(src 
     source/source.cpp
-    source/nodo.cpp
-    source/lista.cpp
+    source/nodoCarta.cpp
+    source/listaCarta.cpp
+    source/nodoJugador.cpp
+    source/listaJugador.cpp
     source/mano.cpp
     source/mazo.cpp
     source/carta.cpp

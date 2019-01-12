@@ -8,10 +8,10 @@ carta::carta(){
     bocaAbajo = true;
 }
 
-carta::carta(int codigo,int palo,bool bocaAbajo){
+carta::carta(int codigo,int palo){
     this->codigo = codigo;
     this->palo = palo;
-    this->bocaAbajo = bocaAbajo;
+    this->bocaAbajo = true;
 }
 carta::carta(carta &ref){
     this->codigo = ref.codigo;

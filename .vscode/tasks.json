@@ -29,7 +29,8 @@
             "command": "./setup.sh",
             "args": [
                 "debug"
-            ]
+            ],
+            "problemMatcher": []
         },
         {
             "label": "configurar (release)",

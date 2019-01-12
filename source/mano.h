@@ -4,12 +4,3 @@
 
 
 
-class mano{
-private:
-    carta **cartas;
-public:
-    mano(/* args */);
-    ~mano();
-};
-
-

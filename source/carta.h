@@ -9,7 +9,7 @@ private:
 
 public:
     carta();
-    carta(int codigo,int palo,bool bocaAbajo);
+    carta(int codigo,int palo);
     carta(carta & ref);
     
     void voltear();

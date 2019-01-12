@@ -19,6 +19,7 @@ mazo::mazo(mazo &ref){
 
 void mazo::inicializar(){
 
+    //eliminamos las cartas anteriores
     for(int i = 0; i < 52; i++){
         //pueden existir cartas previamente eliminadas
         if ( this->Carta[i] != nullptr ) {
@@ -29,7 +30,7 @@ void mazo::inicializar(){
     for(int i = 0; i < 52; i++){
         int codigo = ( i % 13 ) + 1;
         int palo = ( ( i % 52 ) / 13 ) + 1;
-        Carta[i] = new carta(codigo,palo,true);
+        Carta[i] = new carta(codigo,palo);
     }
 
 

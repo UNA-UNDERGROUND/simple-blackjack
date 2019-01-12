@@ -1,5 +1,6 @@
 #include <iostream>
-#include "mazo.h"
+
+#include "nodoCarta.h"
 
 using std::cout;
 using std::cin;
@@ -10,10 +11,8 @@ using std::endl;
 
 int main(int argc, char const *argv[]){
 
-    mazo m;
-
-    m.inicializar();
-    m.barajar();
+    carta *c=new carta(2,2);
+    nodoCarta c1(*c);      
 
 
     cin.ignore();
