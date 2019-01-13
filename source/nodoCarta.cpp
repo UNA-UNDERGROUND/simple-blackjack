@@ -3,16 +3,19 @@
 
 nodoCarta::nodoCarta(carta &ref){
     //copiaremos la carta
-    actual=new carta(ref);
-    siguiente=nullptr;
+    actual = new carta(ref);
+    siguiente = nullptr;
 }
+
 void nodoCarta::setSiguiente(nodoCarta *siguiente){
     this->siguiente = siguiente;
 }
 nodoCarta* nodoCarta::getSiguiente(){
     return siguiente;
 }
-
+carta* nodoCarta::getCarta(){
+	return actual;
+}
 
 nodoCarta::~nodoCarta(){
     

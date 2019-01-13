@@ -37,9 +37,10 @@
 //
 // 
 #include "carta.h"
-
-
 #include <algorithm>
+
+
+
 
 class mazo{
 private:

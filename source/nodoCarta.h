@@ -12,6 +12,7 @@ public:
     nodoCarta(carta &ref);
     void setSiguiente(nodoCarta *ref);
     nodoCarta *getSiguiente();
+	carta *getCarta();
     ~nodoCarta();
 };
 
