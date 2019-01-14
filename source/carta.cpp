@@ -30,6 +30,11 @@ void carta::voltear(){
     bocaAbajo=false;
 }
 
+//este metodo no verifica si esta boca abajo,solo verifica si coincide
+bool carta::equivalente(carta &ref){
+    return this->codigo == ref.codigo && this->palo == ref.palo;
+}
+
 
 carta::~carta(){
 }

@@ -17,7 +17,9 @@ public:
 	listaCarta();
 	listaCarta(listaCarta &ref);
 	void insertarInicio(carta);
+	void insertarFin(carta);
 	void borrarInicio();
+	void borrar(carta ref);
 	int insertados();// cuenta y retorna la cantidad de nodos
 	bool listaVacia(); // retorna true si la lista esta vacia y false sino 
 	~listaCarta();// destruye todos los nodos

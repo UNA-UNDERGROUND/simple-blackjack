@@ -16,6 +16,8 @@ public:
     
     void voltear();
 
+    bool equivalente(carta &ref);
+
     int getcodigo();
     int getPalo();
     

@@ -11,22 +11,22 @@ using std::endl;
 
 
 //definiciones comunes de las cartas
-const std::string nombreCarta[]{ "?", "A", "1", "3", "4" ,"5" ,"6" ,"7" ,"8" ,"9" ,"10", "J", "Q", "k" };
-const std::string nombrePalo[]{ "?", "Espadas", "Tréboles", "Corazones", "Diamantes" };
+const std::string nombreCarta[]{ "?", "A", "2", "3", "4" ,"5" ,"6" ,"7" ,"8" ,"9" ,"10", "J", "Q", "k" };
+const std::string nombrePalo[]{ "?", "Espadas", "TrÃ©boles", "Corazones", "Diamantes" };
 
 
 
 std::ostream& operator<<(std::ostream& o, listaCarta lc) {
 
-	//o << (lc.listaVacia() ? "la lista esta vacia" : "la lista no esta vacia") << endl;
+	o << (lc.listaVacia() ? "la lista esta vacia" : "la lista no esta vacia") << endl;
 	nodoCarta* actual = lc.inicio;
-	//o << "------------------------" << endl;
+	o << "------------------------" << endl;
 	while (actual != nullptr){
 		string ncarta = nombreCarta[actual->getActual()->getcodigo()];
 		string npalo = nombrePalo[actual->getActual()->getPalo()];
-		//o << "carta: " << (ncarta.empty() ? "?" : ncarta) << endl;
-		//o << "palo: " << (npalo.empty() ? "?" : npalo) << endl;
-		//o << "------------------------" << endl;
+		o << "carta: " << (ncarta.empty() ? "?" : ncarta) << endl;
+		o << "palo: " << (npalo.empty() ? "?" : npalo) << endl;
+		o << "------------------------" << endl;
 		actual = actual->getSiguiente();
 	}
 
@@ -37,15 +37,24 @@ std::ostream& operator<<(std::ostream& o, listaCarta lc) {
 
 int main(int argc, char const *argv[]){
 
-	setlocale(LC_ALL, "spanish"); // localizacion al español para soportar tildes y caracteres españoles
-
+	
+    #ifndef __linux__
+    setlocale(LC_ALL, "spanish"); // localizacion al espaï¿½ol para soportar tildes y caracteres espaï¿½oles
+    #endif
 
 
 	listaCarta lc;
+    carta inicio(1,1);
+    carta medio(2,2);
+    carta fin(3,3);
 
-	
+	lc.insertarFin(inicio);
+    lc.insertarFin(medio);
+    lc.insertarFin(fin);
 
+    lc.borrar(fin);
 
+    cout<<lc<<endl;
     
 
 
