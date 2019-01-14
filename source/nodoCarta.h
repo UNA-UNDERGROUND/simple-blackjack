@@ -1,19 +1,18 @@
 #pragma once
+
 #include "carta.h"
 
-
-
-class nodoCarta{
+class nodoCarta {
 private:
-    nodoCarta *siguiente;
-    carta *actual;
-
+	carta *actual;
+	nodoCarta * siguiente;
 public:
-    nodoCarta(carta &ref);
-    void setSiguiente(nodoCarta *ref);
-    nodoCarta *getSiguiente();
-	carta *getCarta();
-    ~nodoCarta();
+
+	nodoCarta(carta *ref, nodoCarta* siguiente);
+	void setActual(carta *ref);
+	carta *getActual();
+	void setSiguiente(nodoCarta* siguiente);
+	nodoCarta* getSiguiente();
+	~nodoCarta();
+
 };
-
-
