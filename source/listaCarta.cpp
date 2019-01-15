@@ -85,9 +85,22 @@ void listaCarta::borrar(carta ref) {
 }
 
 
+carta& listaCarta::obtenerCarta(int posicion) {
+	
+	if (listaVacia()) {
+		return carta();
+	}
+	if (posicion < 0 || posicion > insertados()){
+		return carta();
+	}
+	nodoCarta * actual = inicio;
+	for (int i = 0; i < posicion; i++) {
+		actual = actual->getSiguiente();
+	}
 
-bool listaCarta::listaVacia() {
-	return  inicio == nullptr;
+	//en caso de que exista un error en los nodos podemos verificar si es nulo
+	return actual != nullptr ? carta(*actual->getActual()) : carta();
+
 }
 
 
@@ -102,6 +115,13 @@ int listaCarta::insertados() {
 	}
 	return cantidad;
 }
+
+
+
+bool listaCarta::listaVacia() {
+	return  inicio == nullptr;
+}
+
 
 
 

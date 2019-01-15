@@ -1,8 +1,7 @@
 #include <iostream>
 #include <string>
 
-
-#include "listaCarta.h"
+#include "juego.h"
 
 using std::cout;
 using std::cin;
@@ -15,46 +14,57 @@ const std::string nombreCarta[]{ "?", "A", "2", "3", "4" ,"5" ,"6" ,"7" ,"8" ,"9
 const std::string nombrePalo[]{ "?", "Espadas", "Tréboles", "Corazones", "Diamantes" };
 
 
+std::ostream &operator<<(std::ostream & o, jugadorGenerico jugador) {
 
-std::ostream& operator<<(std::ostream& o, listaCarta lc) {
+	o << "nickname: " << jugador.getNickname() << endl;
+	o << (jugador.sePaso() ? "el jugador se paso" : "el jugador no se ha pasado") << endl;
+	o << "puntos del jugador: " << jugador.getPuntuacion() << endl;
+	o << "------------------------------------" << endl;
 
-	o << (lc.listaVacia() ? "la lista esta vacia" : "la lista no esta vacia") << endl;
-	nodoCarta* actual = lc.inicio;
-	o << "------------------------" << endl;
-	while (actual != nullptr){
-		string ncarta = nombreCarta[actual->getActual()->getcodigo()];
-		string npalo = nombrePalo[actual->getActual()->getPalo()];
-		o << "carta: " << (ncarta.empty() ? "?" : ncarta) << endl;
-		o << "palo: " << (npalo.empty() ? "?" : npalo) << endl;
-		o << "------------------------" << endl;
-		actual = actual->getSiguiente();
+	if (jugador.getPuntuacion() < 0){
+		o << "no hay cartas" << endl;
+		o << "------------------------------------" << endl;
+	}
+	else {
+		int numeroCartas = jugador.manoJugador->getCartas();
+		int puntaje = 0;
+		int ases = 0;
+		for (int i = 0; i < numeroCartas; i++) {
+			o << "carta #" << i + 1 << endl;
+			carta c(jugador.manoJugador->getCarta(i));
+			o << nombreCarta[c.getcodigo()] << " de " << nombrePalo[c.getPalo()] << endl;
+			o << (c.revelada() ? "la carta esta revelada" : "la carta esta oculta") << endl;
+			o << "------------------------------------" << endl;
+		}
 	}
 
+	
 
 	return o;
-
 }
+
 
 int main(int argc, char const *argv[]){
 
-	
-    #ifndef __linux__
-    setlocale(LC_ALL, "spanish"); // localizacion al espa�ol para soportar tildes y caracteres espa�oles
-    #endif
+
+    setlocale(LC_ALL, "es-CR.UTF-8"); // localizacion al español para soportar tildes y caracteres españoles
 
 
-	listaCarta lc;
-    carta inicio(1,1);
-    carta medio(2,2);
-    carta fin(3,3);
 
-	lc.insertarFin(inicio);
-    lc.insertarFin(medio);
-    lc.insertarFin(fin);
 
-    lc.borrar(fin);
+	jugadorGenerico jugadorEjemplo("Perzival");
 
-    cout<<lc<<endl;
+	mazo mazoEjemplo;
+	mazoEjemplo.inicializar();
+	mazoEjemplo.barajar();
+
+
+	for (int i = 0; i < 3; i++) {
+		jugadorEjemplo.pedirCarta(&mazoEjemplo);
+	}
+
+
+	cout << jugadorEjemplo << endl;
     
 
 

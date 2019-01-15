@@ -28,15 +28,17 @@ void mazo::inicializar(){
         } 
     }
     for(int i = 0; i < 52; i++){
-        int codigo = ( i % 13 ) + 1;
-        int palo = ( ( i % 52 ) / 13 ) + 1;
+        int codigo = ( i % 13 ) + 1;			//del 1 al 13
+        int palo = ( ( i % 52 ) / 13 ) + 1;		//del 1 al 4
         Carta[i] = new carta(codigo,palo);
     }
 
 
 }
 void mazo::barajar(){    
-    std::random_shuffle( Carta, Carta + 52 );
+	std::random_device dispositivoAleatorio;
+	std::mt19937 generadorAleatorio(dispositivoAleatorio());
+    std::shuffle( Carta, Carta + 52, generadorAleatorio);
 }
 carta* mazo::tomarCarta(){
 

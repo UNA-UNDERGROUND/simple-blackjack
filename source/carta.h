@@ -20,7 +20,9 @@ public:
 
     int getcodigo();
     int getPalo();
+	bool revelada();
     
+
     ~carta();
 };
 

@@ -37,8 +37,8 @@
 //
 // 
 #include "carta.h"
-#include <algorithm>
-
+#include <algorithm>	//nos permite usar std::shuffle random
+#include <random>		//nos permite una generacion aleatoria mas eficaz
 
 
 
