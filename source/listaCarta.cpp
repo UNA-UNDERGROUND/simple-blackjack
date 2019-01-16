@@ -99,7 +99,7 @@ carta& listaCarta::obtenerCarta(int posicion) {
 	}
 
 	//en caso de que exista un error en los nodos podemos verificar si es nulo
-	return actual != nullptr ? carta(*actual->getActual()) : carta();
+	return actual != nullptr ? *actual->getActual() : carta();
 
 }
 

@@ -2,8 +2,8 @@
 
 
 
-jugadorGenerico::jugadorGenerico(string nickname) {
-	this->nickname = nickname;
+jugadorGenerico::jugadorGenerico() {
+	this->nickname = "";
 	manoJugador = new mano();
 }
 jugadorGenerico::jugadorGenerico(jugadorGenerico &ref) {
@@ -24,7 +24,7 @@ int jugadorGenerico::getPuntuacion() {
 	return manoJugador->getPuntos();
 }
 mano *jugadorGenerico::getMano() {
-	return manoJugador; // esto nos permite girar las cartas entre otros
+	return manoJugador; // esto nos permite girar las cartas entre otros,ademas poder acceder a los datos para cargarlos/guardarlos
 }
 
 jugadorGenerico::~jugadorGenerico() {

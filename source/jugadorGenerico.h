@@ -8,13 +8,13 @@ using std::string;
 
 
 class jugadorGenerico {
-private:
+protected:
 
 	string nickname;
 	mano * manoJugador;
 	
 public:
-	jugadorGenerico(string nickname);
+	jugadorGenerico();
 	jugadorGenerico(jugadorGenerico &ref);
 
 	void pedirCarta(mazo *m);
@@ -22,7 +22,7 @@ public:
 	string getNickname();
 	bool sePaso();
 	int getPuntuacion();
-	mano* getMano();				//pasamos una copia para evitar modificaciones
+	mano* getMano();						//pasamos una copia para evitar modificaciones
 
 	~jugadorGenerico();
 

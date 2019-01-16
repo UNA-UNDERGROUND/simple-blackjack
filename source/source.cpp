@@ -2,6 +2,8 @@
 #include <string>
 
 #include "juego.h"
+#include "jugador.h"
+#include "dealer.h"
 
 using std::cout;
 using std::cin;
@@ -52,20 +54,22 @@ int main(int argc, char const *argv[]){
 
 
 
-	jugadorGenerico jugadorEjemplo("Perzival");
+	jugador jugadorEjemplo("Perzival");
+	dealer dealerEjemplo;
 
 	mazo mazoEjemplo;
 	mazoEjemplo.inicializar();
 	mazoEjemplo.barajar();
 
 
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 2; i++) {
+		dealerEjemplo.pedirCarta(&mazoEjemplo);
 		jugadorEjemplo.pedirCarta(&mazoEjemplo);
 	}
 
-
-	cout << jugadorEjemplo << endl;
-    
+	dealerEjemplo.volteaSegunta();
+	//cout << jugadorEjemplo << endl;
+	cout << dealerEjemplo << endl;
 
 
 
