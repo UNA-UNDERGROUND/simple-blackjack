@@ -11,6 +11,7 @@ public:
 	jugador(jugador &ref);
 	string getNickname();
 	void pedirCarta(mazo *m);
+	bool equivalente();							//metodo necesario para comparar jugadores en la lista
 
 	~jugador();
 };
