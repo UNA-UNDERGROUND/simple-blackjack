@@ -7,7 +7,12 @@ private:
 public:
 	dealer();
 
+
+	string getNickname();
+	void pedirCarta(mazo *m);
 	void volteaSegunta();
+
+
 	~dealer();
 
 };

@@ -3,20 +3,14 @@
 
 
 jugadorGenerico::jugadorGenerico() {
-	this->nickname = "";
 	manoJugador = new mano();
 }
 jugadorGenerico::jugadorGenerico(jugadorGenerico &ref) {
-	this->nickname = ref.nickname;
 	manoJugador = new mano(*ref.manoJugador);
 }
 
-void jugadorGenerico::pedirCarta(mazo *m) {
-	manoJugador->agregarCarta(m);
-}
-string jugadorGenerico::getNickname() {
-	return nickname;
-}
+
+
 bool jugadorGenerico::sePaso() {
 	return manoJugador->getPuntos() > 21;
 }

@@ -16,7 +16,7 @@ const std::string nombreCarta[]{ "?", "A", "2", "3", "4" ,"5" ,"6" ,"7" ,"8" ,"9
 const std::string nombrePalo[]{ "?", "Espadas", "Tréboles", "Corazones", "Diamantes" };
 
 
-std::ostream &operator<<(std::ostream & o, jugadorGenerico jugador) {
+std::ostream &operator<<(std::ostream & o,jugadorGenerico& jugador) {
 
 	o << "nickname: " << jugador.getNickname() << endl;
 	o << (jugador.sePaso() ? "el jugador se paso" : "el jugador no se ha pasado") << endl;
@@ -67,7 +67,7 @@ int main(int argc, char const *argv[]){
 		jugadorEjemplo.pedirCarta(&mazoEjemplo);
 	}
 
-	dealerEjemplo.volteaSegunta();
+	//dealerEjemplo.volteaSegunta();
 	//cout << jugadorEjemplo << endl;
 	cout << dealerEjemplo << endl;
 
