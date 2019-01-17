@@ -14,7 +14,7 @@ public:
 	void insertarInicio(jugadorGenerico&);
 	void insertarFin(jugadorGenerico&);
 	void borrarInicio();
-	void borrar(jugadorGenerico& ref);				
+	void borrar(string nickname);				
 	jugadorGenerico &obtenerJugador(int posicion);	
 	int insertados();					
 	bool listaVacia();					

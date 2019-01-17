@@ -56,9 +56,9 @@ void listaJugador::borrarInicio() {
 	}
 }
 
-void listaJugador::borrar(jugadorGenerico& ref) {
+void listaJugador::borrar(string nickname) {
 
-	if (inicio->getActual()->equivalente(ref)) {
+	if (inicio->getActual()->equivalente(nickname)) {
 		borrarInicio();
 	}
 
@@ -68,7 +68,7 @@ void listaJugador::borrar(jugadorGenerico& ref) {
 	while (actual->getSiguiente() != nullptr) {
 
 
-		if (actual->getSiguiente()->getActual()->equivalente(ref)) {
+		if (actual->getSiguiente()->getActual()->equivalente(nickname)) {
 			nodoJugador *siguiente = actual->getSiguiente()->getSiguiente();
 			if (actual)
 

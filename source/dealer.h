@@ -11,7 +11,7 @@ public:
 	string getNickname();
 	void pedirCarta(mazo *m);
 	void volteaSegunta();
-
+	bool equivalente(string nickname);
 
 	~dealer();
 

@@ -23,6 +23,9 @@ void dealer::volteaSegunta() {
 	this->manoJugador->getCarta(1).voltear();
 }
 
+bool dealer::equivalente(string nickname) {
+	return getNickname() == nickname;						//puede que un futuro querramos cambiar el nickname del dealer por lo que se evitaran modificaciones innecesarias
+}
 
 
 
