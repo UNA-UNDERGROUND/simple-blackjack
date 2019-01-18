@@ -1,6 +1,6 @@
 
 #include <Windows.h> //la mayoria de estas funciones requieren la libreria de windows,pero tambien se pueder portear a linux o unix de ser necesario
-
+#include "carta.h"
 
 //utiles: aqui se encontraran fragmentos de codigo para la interfaz grafica
 //
