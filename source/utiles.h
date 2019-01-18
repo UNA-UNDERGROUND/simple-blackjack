@@ -9,6 +9,8 @@
 // gotoxy extraido de:								https://www.aulavirtual.una.ac.cr/mod/resource/view.php?id=302651
 // color  basado en:								https://stackoverflow.com/questions/9203362/c-color-text-in-terminal-applications-in-windows
 // las definiciones de colores estan basadas en:	https://stackoverflow.com/questions/17125440/c-win32-console-color
+// : https://stackoverflow.com/questions/18028808/remove-blinking-underscore-on-console-cmd-prompt
+
 
 // 
 // definiciones de colores, notese que estan limitados a 8 colores,pero son 16 por la intentencidad,tambien al ser codigos hexadecimales pueden ser combinados con un o lógico
@@ -51,6 +53,14 @@ void cambiarColor(color texto, color fondo){
 
 }
 
+//nos permite mostrar/ocultar el cursor, por defecto lo muestra
+void mostrarCursor(bool mostrarCursor = true){
+	HANDLE consola = GetStdHandle(STD_OUTPUT_HANDLE);
 
+	CONSOLE_CURSOR_INFO     infoCursor;						//almacena la informacion del cursor
 
+	GetConsoleCursorInfo(consola, &infoCursor);				//obtenemos la información del cursor
+	infoCursor.bVisible = mostrarCursor;							//cambiamos el estado
+	SetConsoleCursorInfo(consola, &infoCursor);				//guardamos los cambios
+}
 
