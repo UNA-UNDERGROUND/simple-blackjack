@@ -3,8 +3,8 @@
 #include <iostream>
 
 //definiciones comunes de las cartas
-const std::string nombreCarta[]{ "?", "A", "2", "3", "4" ,"5" ,"6" ,"7" ,"8" ,"9" ,"10", "J", "Q", "k" };
-const std::string nombrePalo[]{ "?", "Espadas", "Tréboles", "Corazones", "Diamantes" };
+const std::wstring nombreCarta[]{ L"?", L"A", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"10", L"J", L"Q", L"k" };
+const std::wstring nombrePalo[]{ L"?", L"Espadas", L"Tréboles", L"Corazones", L"Diamantes" };
 const std::wstring simboloPalo[]{ L"?", L"♠", L"♣", L"♥", L"♦" };
 
 
