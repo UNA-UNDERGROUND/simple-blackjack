@@ -2,90 +2,62 @@
 
 
 
-// cambia la posicion del cursor (consola) a la ubicacion indicada en coordenadas 2D 
-void gotoXY(HANDLE salidaConsola, int x, int y) {
-	COORD coordenadas;
-	coordenadas.X = x;
-	coordenadas.Y = y;
-	SetConsoleCursorPosition(salidaConsola, coordenadas);
+void consolaUnicode(bool activada) {
+
+	_setmode(_fileno(stdout), activada ? _O_U16TEXT : _O_TEXT);		// cambiamos a unicode en la consola para mostrar caracteres especiales
 }
 
+boton capturarEntrada() {
 
-//en esta funcion no ocupamos restaurar los colores a diferiencia de la original,tambien elige por defecto fondo negro
-void cambiarColor(HANDLE salidaConsola, color texto, color fondo = negro) {
-	SetConsoleTextAttribute(salidaConsola, texto | (fondo << 4));
-}
+	int entrada = _getch();
 
-//nos permite mostrar/ocultar el cursor, por defecto lo muestra
-void mostrarCursor(HANDLE salidaConsola, bool mostrarCursor = true) {
-
-	CONSOLE_CURSOR_INFO     infoCursor;								//almacena la informacion del cursor
-	GetConsoleCursorInfo(salidaConsola, &infoCursor);				//obtenemos la información del cursor
-	infoCursor.bVisible = mostrarCursor;							//cambiamos el estado
-	SetConsoleCursorInfo(salidaConsola, &infoCursor);				//guardamos los cambios
-}
-
-
-void imprimirCarta(carta& ref, int x, int y) {
-	std::wstring simbolo;
-
-	//nos dirigimos a la posicion inicial
-	gotoXY(x, y);
-
-	//cambiamos a modo unicode
-	_setmode(_fileno(stdout), _O_U16TEXT);
-	wcout << L"╔═══════╗";
-	for (int i = 0; i < 5; i++) {
-		gotoXY(x, y + i + 1);
-		wcout << L"║       ║";
-	}
-	gotoXY(x, y + 6);
-	wcout << L"╚═══════╝";
-
-
-	if (ref.revelada()) {
-		//nos dirigimos al centro
-		gotoXY(x + 4, y + 3);
-		//verificar el rango y escoger el color del simbolo
-		int palo = ref.getPalo();
-		if (palo < 1 || palo > 4) {
-			cambiarColor(amarillo, negro);
-		}
-		else {
-			if (palo > 2) {
-				cambiarColor(rojo, negro);
-			}
-			else {
-				cambiarColor(gris, negro);
-			}
-		}
-
-		wcout << simboloPalo[ref.getPalo()];
-
-
-		cambiarColor(celeste, negro);
-		gotoXY(x + 7, y + 5);
-		wcout << nombreCarta[ref.getcodigo()];
-		gotoXY(x + 1, y + 1);
-		wcout << nombreCarta[ref.getcodigo()];
-	}
-	else {
-		for (int i = 1; i < 6; i++) {
-			gotoXY(x + 1, y + i);
-			cambiarColor(verde);
-
-			wcout << L"░░░░░░░";
-
-
-		}
-
-		gotoXY(x + 1, y + 1);
+	//no capturaremos entrada innecesaria
+	while (entrada == entradas::esc) {
+			entrada = _getch();
 	}
 
 
 
+	switch (entrada) {
+	case entradas::arriba: case entradas::W:
+		return boton::Arriba;
+		break;
+	case entradas::abajo: case entradas::S:
+		return boton::Abajo;
+		break;
+	case entradas::izquierda: case entradas::A:
+		return boton::Izquierda;
+		break;
+	case entradas::derecha: case entradas::D:
+		return boton::Derecha;
+		break;
+	case entradas::Q:
+		return boton::Boton1;
+		break;
+	case entradas::E:
+		return boton::Boton2;
+		break;
+	case entradas::Z:
+		return boton::Boton3;
+		break;
+	case entradas::X:
+		return boton::Boton4;
+		break;
+	case entradas::C:
+		return boton::Boton5;
+		break;
+	case entradas::escape:
+		return boton::Atras;
+		break;
+	case entradas::intro:
+		return boton::Adelante;
+	break;
+	default:{
+		return boton::Desconocido;
+		break;
+	}
+	}
 
-	_setmode(_fileno(stdout), _O_TEXT);
-
-	cambiarColor(blanco, negro);
 }
+
+

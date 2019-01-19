@@ -22,7 +22,6 @@ set(src
     source/nodoCarta.cpp
     source/nodoJugador.cpp
     source/source.cpp
-	source/utiles.cpp
 )
 
 
@@ -30,6 +29,7 @@ set(src2
 	source/carta.cpp
     source/dealer.cpp
 	source/gestorArchivo.cpp
+	source/gestorConsola.cpp
 	source/juego.cpp
     source/jugador.cpp
     source/jugadorGenerico.cpp
