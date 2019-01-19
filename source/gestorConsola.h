@@ -5,7 +5,7 @@
 class gestorConsola {
 
 	HANDLE salidaConsola;
-
+	DWORD dwBytesWritten = 0;
 public:
 	gestorConsola();
 
@@ -20,6 +20,10 @@ public:
 	//nos permite mostrar/ocultar el cursor, por defecto lo muestra
 	void mostrarCursor(bool mostrarCursor = true);
 	void gestorConsola::limpiarPantalla();
+
+	void setConsola(HANDLE consola);
+	HANDLE getConsola();
+
 
 	~gestorConsola();
 

@@ -3,7 +3,6 @@
 
 
 void consolaUnicode(bool activada) {
-
 	_setmode(_fileno(stdout), activada ? _O_U16TEXT : _O_TEXT);		// cambiamos a unicode en la consola para mostrar caracteres especiales
 }
 

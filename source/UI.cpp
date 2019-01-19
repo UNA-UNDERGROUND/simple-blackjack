@@ -19,15 +19,16 @@ using std::string;
 using std::endl;
 
 gestorConsola consolaSalida;
+bool animarLogo = true;
 
 void imprimirCarta(carta& ref, int x, int y) {
 	std::wstring simbolo;
 
+
 	//nos dirigimos a la posicion inicial
 	consolaSalida.gotoXY(x, y);
 
-	//cambiamos a modo unicode
-	consolaUnicode();
+
 	wcout << L"╔═══════╗";
 	for (int i = 0; i < 5; i++) {
 		consolaSalida.gotoXY(x, y + i + 1);
@@ -76,15 +77,12 @@ void imprimirCarta(carta& ref, int x, int y) {
 	}
 
 
-	consolaUnicode(false);
+
 
 	consolaSalida.cambiarColor(blanco, negro);
 }
 
 void dibujarLogo(int xLogo, int yLogo) {
-
-	consolaUnicode();
-
 
 	consolaSalida.gotoXY(xLogo, yLogo++);
 
@@ -96,7 +94,7 @@ void dibujarLogo(int xLogo, int yLogo) {
 	consolaSalida.cambiarColor(amarillo);
 	wcout << L"     ██╗ ";
 	consolaSalida.cambiarColor(blanco);
-	wcout << L"█████╗  ██████╗██╗  ██╗ ";
+	wcout << L"█████╗  ██████╗██╗  ██╗";
 
 
 	//segunda linea
@@ -108,7 +106,7 @@ void dibujarLogo(int xLogo, int yLogo) {
 	consolaSalida.cambiarColor(amarillo);
 	wcout << L"     ██║";
 	consolaSalida.cambiarColor(blanco);
-	wcout << L"██╔══██╗██╔════╝██║ ██╔╝ " << endl;
+	wcout << L"██╔══██╗██╔════╝██║ ██╔╝" << endl;
 
 
 	//tercera linea
@@ -120,7 +118,7 @@ void dibujarLogo(int xLogo, int yLogo) {
 	consolaSalida.cambiarColor(amarillo);
 	wcout << L"     ██║";
 	consolaSalida.cambiarColor(blanco);
-	wcout << L"███████║██║     █████╔╝  " << endl;
+	wcout << L"███████║██║     █████╔╝" << endl;
 
 	//cuarta linea
 	consolaSalida.gotoXY(xLogo, yLogo++);
@@ -131,7 +129,7 @@ void dibujarLogo(int xLogo, int yLogo) {
 	consolaSalida.cambiarColor(amarillo);
 	wcout << L"██   ██║";
 	consolaSalida.cambiarColor(blanco);
-	wcout << L"██╔══██║██║     ██╔═██╗  " << endl;
+	wcout << L"██╔══██║██║     ██╔═██╗" << endl;
 
 	//quinta linea
 	consolaSalida.gotoXY(xLogo, yLogo++);
@@ -142,7 +140,7 @@ void dibujarLogo(int xLogo, int yLogo) {
 	consolaSalida.cambiarColor(amarillo);
 	wcout << L"╚█████╔╝";
 	consolaSalida.cambiarColor(blanco);
-	wcout << L"██║  ██║╚██████╗██║  ██╗ " << endl;
+	wcout << L"██║  ██║╚██████╗██║  ██╗" << endl;
 
 	//sexta linea
 	consolaSalida.gotoXY(xLogo, yLogo++);
@@ -153,120 +151,208 @@ void dibujarLogo(int xLogo, int yLogo) {
 	consolaSalida.cambiarColor(amarillo);
 	wcout << L" ╚════╝ ";
 	consolaSalida.cambiarColor(blanco);
-	wcout << L"╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝ " << endl;
+	wcout << L"╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝" << endl;
 
 
-	consolaUnicode(false);
+	
 }
 
 int menuPrincipal() {
+
+	consolaUnicode();						//podremos acceder a mas caracteres,pero no podremos usar std::cout, a cambio se puede usar std::wcout
 	consolaSalida.mostrarCursor(false);
 
 	carta c1(1, 3);
 	carta c2(11, 1);
 	carta c3(1, 1);
 
-	c1.voltear();
-	c2.voltear();
+	carta cartas[]{carta(1,3),carta(11,1),carta(2, 2),carta(13, 4),carta(1, 1)};
 
 
+	for (int i = 0; i < 4; i++) {
+		cartas[i].voltear();
+	}
 
 
+	int puntoX[] = {24,97,60,60};
+	int puntoY[] = {15,8,15,8};
 
-	int xLogo = 0;
-	int yLogo = 0;
 
-	int yCartas = 0;
+	color colorLuz = rojo;
+	int puntosRestantes = 3; //detemina la longitud de una luz especifica
+
 	int xCartas = 0;
+	int yCartas = 0;
 
-	imprimirCarta(c1, xCartas, yCartas);
-	imprimirCarta(c2, xCartas += 8, yCartas);
-	imprimirCarta(c3, xCartas += 8, yCartas);
 
+	imprimirCarta(cartas[0], xCartas, yCartas);
+	imprimirCarta(cartas[1], xCartas += 8, yCartas);
+	imprimirCarta(cartas[4], xCartas += 8, yCartas);
+
+	xCartas = 110;
+	yCartas = 23;
+	imprimirCarta(cartas[4], xCartas, yCartas);
+	imprimirCarta(cartas[3], xCartas -= 5, yCartas-=2);
+	imprimirCarta(cartas[2], xCartas -= 5, yCartas-=2);
 
 	dibujarLogo(25, 9);
 
+
+
 	int eleccion = 0;
+
+
+	consolaSalida.gotoXY(0, 26);
+	wcout << "controles:" << endl;
+	wcout << "espacio:              seleccionar." << endl;
+	wcout << "flecha arriba/w:      moverse arriba." << endl;
+	wcout << "flecha abajo/s:       moverse abajo.";
+	
 
 	while (true) {
 
 
-		consolaSalida.gotoXY(55, 18);
-		if (eleccion == 0) {
-			consolaSalida.cambiarColor(negro, gris);
+		{
+			consolaSalida.gotoXY(55, 18);
+			if (eleccion == 0) {
+				consolaSalida.cambiarColor(negro, gris);
+			}
+			wcout << "nueva  partida ";
+			consolaSalida.cambiarColor(blanco);
+			consolaSalida.gotoXY(55, 19);
+
+
+			if (eleccion == 1) {
+				consolaSalida.cambiarColor(negro, gris);
+			}
+			wcout << "cargar partida ";
+			consolaSalida.cambiarColor(blanco);
+			consolaSalida.gotoXY(55, 20);
+
+
+			if (eleccion == 2) {
+				consolaSalida.cambiarColor(negro, gris);
+			}
+			wcout << "  Marcadores   ";
+			consolaSalida.cambiarColor(blanco);
+
+
+			if (eleccion == 3) {
+				consolaSalida.cambiarColor(negro, gris);
+			}
+			consolaSalida.gotoXY(55, 21);
+
+			wcout << "     Salir     ";
+			consolaSalida.cambiarColor(blanco);
+
 		}
-		cout << "nueva partida  ";
-		consolaSalida.cambiarColor(blanco);
-		consolaSalida.gotoXY(55, 19);
 
 
-		if (eleccion == 1) {
-			consolaSalida.cambiarColor(negro, gris);
-		}
-		cout << "cargar partida ";
-		consolaSalida.cambiarColor(blanco);
-		consolaSalida.gotoXY(55, 20);
 
 
-		if (eleccion == 2) {
-			consolaSalida.cambiarColor(negro, gris);
-		}
-		cout << "Marcadores     ";
-		consolaSalida.cambiarColor(blanco);
-
-
-		if (eleccion == 3) {
-			consolaSalida.cambiarColor(negro, gris);
-		}
-		consolaSalida.gotoXY(55, 21);
-
-		cout << "Salir          ";
-		consolaSalida.cambiarColor(blanco);
-
-
-		consolaSalida.gotoXY(55, 22);
-		cout << "eleccion: " << eleccion;
 
 		consolaSalida.gotoXY(0, 8);
+		
 
+		//int entrada = capturarEntrada();
+		int entrada = 0;
 
-		int entrada = capturarEntrada();
+		auto future = std::async(std::launch::async, capturarEntrada);
+		while (future.wait_for(std::chrono::milliseconds(75)) == std::future_status::timeout) {
+			
+			//durante este tiempo podemos realizar algo rapido como animar el titulo
+			
+			consolaSalida.cambiarColor(colorLuz);
+			for (int i = 0; i < 4; i++) {
+				consolaSalida.gotoXY(puntoX[i], puntoY[i]);
+				wcout << "*";
+				if (puntoX[i] == 24 && puntoY[i] != 15) {
+					puntoY[i]++;
+				}
+				else if (puntoX[i] != 97 && puntoY[i] == 15) {
+					puntoX[i]++;
+				}
+				else if (puntoX[i] == 97 && puntoY[i] != 8) {
+					puntoY[i]--;
+				}
+				else {
+					puntoX[i]--;
+				}
+			}
+			consolaSalida.cambiarColor(blanco);
 
+			if (puntosRestantes == 0) {
+				if (colorLuz == rojo) {
+					colorLuz = celeste;
+				}
+				else if (colorLuz == celeste) {
+					colorLuz = verde;
+				}
+				else if (colorLuz == verde) {
+					colorLuz = amarillo;
+				}
+				else {
+					colorLuz = rojo;
+				}
 
+				//cambiar la luz en cada inicio
+				if (puntoX[0] == 24 && puntoY[0] == 8) {
+					if (colorLuz == rojo) {
+						colorLuz = celeste;
+					}
+					else if (colorLuz == celeste) {
+						colorLuz = verde;
+					}
+					else if (colorLuz == verde) {
+						colorLuz = amarillo;
+					}
+					else {
+						colorLuz = rojo;
+					}
+				}
 
-		switch (entrada) {
-		case Arriba:
-			cout << "arriba    " << endl;
-			if (eleccion != 0) {
-				eleccion--;
+				puntosRestantes = 3;
 			}
 			else {
-				eleccion = 3;
+				puntosRestantes--;
 			}
-			break;
-		case Abajo:
-			cout << "abajo    " << endl;
-			if (eleccion != 3) {
-				eleccion++;
-			}
-			else {
-				eleccion = 0;
-			}
-			break;
-
-		case Adelante:
-			return eleccion;
-			break;
 
 
-		default:
-		{
-			break;
-		}
 		}
 
+			entrada = future.get();
 
+			switch (entrada) {
+			case Arriba:
+				if (eleccion != 0) {
+					eleccion--;
+				}
+				else {
+					eleccion = 3;
+				}
 
+				break;
+			case Abajo:
+				if (eleccion != 3) {
+					eleccion++;
+				}
+				else {
+					eleccion = 0;
+				}
+
+				break;
+
+			case Adelante:
+				return eleccion;
+
+				break;
+			default:{
+
+				break;
+			}
+			}
+
+		
 
 	}
 }
@@ -275,28 +361,22 @@ int main(int argc, char const *argv[]) {
 
 
 
-	setlocale(LC_ALL, "Spanish");				// localizacion al español para soportar tildes y caracteres españoles
-	
+	//setlocale(LC_ALL, "Spanish");				// localizacion al español para soportar tildes y caracteres españoles
 
-	int eleccion;
+
+
+
+
+	int eleccion = 0;
 	do {
+		animarLogo = true;
 		eleccion = menuPrincipal();
-	} while (eleccion!=3);
+		animarLogo = false;
+
+	} while (eleccion != 3);
 
 
 
-	setlocale(LC_ALL, "es-CR.UTF-8"); // localizacion al espa�ol para soportar tildes y caracteres espa�oles
-	consolaSalida.mostrarCursor(false);
-	consolaSalida.gotoXY(8, 8);
-	color Color = blanco;
-	consolaSalida.cambiarColor(negro, verde);
-	cout << "hola mundo!!!";
-	//cout << "color: " << "0x" << std::hex << Color << endl;
-	//cout << "color(desplazado): " << "0x" << std::hex << (Color<<4) << endl;
-	//cout << "color: " << "0x" << std::hex << (BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE) << endl;
-
-
-	cout << "fin del programa(main)" << endl;
 	return 0;
 }
 

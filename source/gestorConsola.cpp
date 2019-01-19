@@ -3,6 +3,12 @@
 
 gestorConsola::gestorConsola() {
 	salidaConsola = GetStdHandle(STD_OUTPUT_HANDLE);
+	/*
+	wchar_t *screen = new wchar_t[120 * 30];
+	salidaConsola = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
+	SetConsoleActiveScreenBuffer(salidaConsola);
+	*/
+
 }
 
 
@@ -69,6 +75,14 @@ void gestorConsola::limpiarPantalla() {
 	bSuccess = SetConsoleCursorPosition(salidaConsola, coordScreen);
 	return;
 }
+
+void gestorConsola::setConsola(HANDLE consola) {
+	salidaConsola = consola;
+}
+HANDLE gestorConsola::getConsola() {
+	return salidaConsola;
+}
+
 
 
 gestorConsola::~gestorConsola() {

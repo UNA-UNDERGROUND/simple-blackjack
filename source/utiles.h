@@ -6,8 +6,11 @@
 #include <fcntl.h>				// nos permite cambiar a modo unicode
 #include <conio.h>				// getch
 #include <iostream>
+#include <chrono>
+#include <future>
+#include <string>
 
-
+using std::string;
 using std::wstring;			//variante estandar de string
 using std::wcout;			//variante estandar de cout
 
@@ -22,6 +25,8 @@ using std::wcout;			//variante estandar de cout
 // uso de _getch() obtenido de:						https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/getch-getwch?view=vs-2017
 // getch con flechas :								https://stackoverflow.com/questions/10463201/getch-and-arrow-codes
 // limpart pantalla extraido de :					https://support.microsoft.com/en-us/help/99261/how-to-performing-clear-screen-cls-in-a-console-application
+// lectura en segundo plano extraido y badado de:	https://gist.github.com/vmrob/ff20420a20c59b5a98a1
+//													http://www.cplusplus.com/reference/future/future/wait_for/
 
 
 
@@ -84,4 +89,12 @@ enum color {
 void consolaUnicode(bool activada = true);
 
 boton capturarEntrada();
+
+
+
+
+
+
+
+
 
