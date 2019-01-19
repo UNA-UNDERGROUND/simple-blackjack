@@ -157,6 +157,7 @@ void dibujarLogo(int xLogo, int yLogo) {
 	
 }
 
+
 int menuPrincipal() {
 
 	consolaUnicode();						//podremos acceder a mas caracteres,pero no podremos usar std::cout, a cambio se puede usar std::wcout
@@ -265,7 +266,16 @@ int menuPrincipal() {
 			consolaSalida.cambiarColor(colorLuz);
 			for (int i = 0; i < 4; i++) {
 				consolaSalida.gotoXY(puntoX[i], puntoY[i]);
-				wcout << "*";
+				wcout << L"▓";
+
+				if (puntoX[i] == 24) {
+					consolaSalida.gotoXY(puntoX[i] - 1, puntoY[i]);
+					wcout << L"▓";
+				}
+				else if (puntoX[i] == 97) {
+					wcout << L"▓";
+				}
+
 				if (puntoX[i] == 24 && puntoY[i] != 15) {
 					puntoY[i]++;
 				}
@@ -278,6 +288,9 @@ int menuPrincipal() {
 				else {
 					puntoX[i]--;
 				}
+				
+
+
 			}
 			consolaSalida.cambiarColor(blanco);
 
@@ -369,10 +382,7 @@ int main(int argc, char const *argv[]) {
 
 	int eleccion = 0;
 	do {
-		animarLogo = true;
 		eleccion = menuPrincipal();
-		animarLogo = false;
-
 	} while (eleccion != 3);
 
 

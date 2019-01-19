@@ -280,6 +280,11 @@
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Link>
+      <AdditionalOptions>/Zi %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\carta.cpp" />
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\dealer.cpp" />
@@ -294,7 +299,9 @@
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\mazo.cpp" />
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\nodoCarta.cpp" />
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\nodoJugador.cpp" />
-    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\UI.cpp" />
+    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\UI.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/ZI %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\utiles.cpp" />
   </ItemGroup>
   <ItemGroup>
