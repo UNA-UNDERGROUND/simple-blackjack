@@ -270,12 +270,20 @@
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\utiles.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\ZERO_CHECK.vcxproj">
-      <Project>{BFE089BE-70C6-3C29-B863-ED12053564E6}</Project>
-      <Name>ZERO_CHECK</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </ProjectReference>
+    <ClInclude Include="source\carta.h" />
+    <ClInclude Include="source\dealer.h" />
+    <ClInclude Include="source\gestorArchivo.h" />
+    <ClInclude Include="source\gestorConsola.h" />
+    <ClInclude Include="source\juego.h" />
+    <ClInclude Include="source\jugador.h" />
+    <ClInclude Include="source\jugadorGenerico.h" />
+    <ClInclude Include="source\listaCarta.h" />
+    <ClInclude Include="source\listaJugador.h" />
+    <ClInclude Include="source\mano.h" />
+    <ClInclude Include="source\mazo.h" />
+    <ClInclude Include="source\nodoCarta.h" />
+    <ClInclude Include="source\nodoJugador.h" />
+    <ClInclude Include="source\utiles.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

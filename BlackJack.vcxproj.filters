@@ -42,14 +42,55 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\CMakeLists.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="Source Files">
       <UniqueIdentifier>{CE833D98-A41F-35C9-8C48-11A99CF432BE}</UniqueIdentifier>
     </Filter>
     <Filter Include="clases">
       <UniqueIdentifier>{3e9651d0-49a7-4f69-b85b-806afa1eeb84}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\carta.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\dealer.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gestorArchivo.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gestorConsola.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\juego.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\jugador.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\jugadorGenerico.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\listaCarta.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\listaJugador.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\mano.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\mazo.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\nodoCarta.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\nodoJugador.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utiles.h">
+      <Filter>clases</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

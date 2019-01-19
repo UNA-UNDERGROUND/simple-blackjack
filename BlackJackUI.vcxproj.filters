@@ -55,4 +55,48 @@
       <UniqueIdentifier>{dcf280f4-13c0-4b05-8a1e-0c428d12713f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\carta.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\dealer.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gestorArchivo.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gestorConsola.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\jugador.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\juego.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\jugadorGenerico.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\listaCarta.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\listaJugador.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\mano.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\mazo.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\nodoCarta.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\nodoJugador.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utiles.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

@@ -281,7 +281,6 @@ int main(int argc, char const *argv[]) {
 
 
 	cout << "fin del programa(main)" << endl;
-	cin.ignore();
 	return 0;
 }
 

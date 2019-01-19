@@ -37,7 +37,7 @@ public:
 
 	~jugadorGenerico();
 
-	friend std::ostream& operator<<(std::ostream&, jugadorGenerico&);
+
 
 };
 
