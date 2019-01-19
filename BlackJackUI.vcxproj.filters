@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\UI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\carta.cpp">
+      <Filter>clases</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\dealer.cpp">
+      <Filter>clases</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\gestorArchivo.cpp">
+      <Filter>clases</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\juego.cpp">
+      <Filter>clases</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\gestorConsola.cpp">
+      <Filter>clases</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\jugador.cpp">
+      <Filter>clases</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\jugadorGenerico.cpp">
+      <Filter>clases</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\listaCarta.cpp">
+      <Filter>clases</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\listaJugador.cpp">
+      <Filter>clases</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\mazo.cpp">
+      <Filter>clases</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\mano.cpp">
+      <Filter>clases</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\nodoCarta.cpp">
+      <Filter>clases</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\nodoJugador.cpp">
+      <Filter>clases</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\utiles.cpp">
+      <Filter>clases</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{CE833D98-A41F-35C9-8C48-11A99CF432BE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clases">
+      <UniqueIdentifier>{dcf280f4-13c0-4b05-8a1e-0c428d12713f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
