@@ -3,8 +3,12 @@
 
 
 
+
 #include "gestorConsola.h"
 #include "carta.h"
+
+
+#include "utiles.h"
 
 
 using std::cout;
@@ -270,6 +274,7 @@ int menuPrincipal() {
 int main(int argc, char const *argv[]) {
 
 
+
 	setlocale(LC_ALL, "Spanish");				// localizacion al español para soportar tildes y caracteres españoles
 	
 
@@ -278,6 +283,17 @@ int main(int argc, char const *argv[]) {
 		eleccion = menuPrincipal();
 	} while (eleccion!=3);
 
+
+
+	setlocale(LC_ALL, "es-CR.UTF-8"); // localizacion al espa�ol para soportar tildes y caracteres espa�oles
+	consolaSalida.mostrarCursor(false);
+	consolaSalida.gotoXY(8, 8);
+	color Color = blanco;
+	consolaSalida.cambiarColor(negro, verde);
+	cout << "hola mundo!!!";
+	//cout << "color: " << "0x" << std::hex << Color << endl;
+	//cout << "color(desplazado): " << "0x" << std::hex << (Color<<4) << endl;
+	//cout << "color: " << "0x" << std::hex << (BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE) << endl;
 
 
 	cout << "fin del programa(main)" << endl;

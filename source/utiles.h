@@ -1,4 +1,6 @@
-﻿
+﻿#pragma once
+
+
 #include <Windows.h>			// la mayoria de estas funciones requieren la libreria de windows,pero tambien se pueder portear a linux o unix de ser necesario
 #include <io.h>					// nos permite cambiar el modo de la consola
 #include <fcntl.h>				// nos permite cambiar a modo unicode
