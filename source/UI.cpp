@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 
-
 #include "utiles.h"
 
 using std::cout;
@@ -15,7 +14,6 @@ int main(int argc, char const *argv[]) {
 
 
 	setlocale(LC_ALL, "es-CR.UTF-8"); // localizacion al español para soportar tildes y caracteres españoles
-
 	mostrarCursor(false);
 	gotoXY(8, 8);
 	color Color = blanco;
