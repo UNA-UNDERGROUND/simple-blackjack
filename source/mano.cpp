@@ -13,6 +13,9 @@ mano::mano(mano &ref) {
 void mano::agregarCarta(mazo* ref) {
 	cartas->insertarFin(*ref->tomarCarta());
 }
+void mano::agregarCarta(carta ref) {
+	cartas->insertarFin(ref);
+}
 void mano::limpiar() {
 
 	if (cartas != nullptr) {

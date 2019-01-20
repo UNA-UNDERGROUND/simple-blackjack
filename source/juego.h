@@ -1,23 +1,22 @@
 #pragma once
 using namespace std;
 #include <iostream>
-#include "carta.h"
-#include "mano.h"
+
 #include "jugador.h"
 #include "dealer.h"
 #include "listaJugador.h"
-#include "mazo.h"
+#include "listaCarta.h"
+
+#include "gestorGraficos.h"
 
 class juego {
 private:
-	mano *man;
-	carta *cart;
-	dealer *deal;
-	jugador *juga;
-	listaJugador listJuga;
+	dealer *dealer;
+	listaJugador *listaJugadores;
 	mazo *baraja;
 public:
 	juego();
-	~juego();
 	void jugar();
+
+	~juego();
 };

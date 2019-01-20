@@ -21,10 +21,14 @@ public:
 	mano(mano &ref);
 
 	void agregarCarta(mazo* ref);
+	void agregarCarta(carta ref);			//indispensable para cargar cartas
 	void limpiar();
 	int getCartas();
-	carta &getCarta(int posicion); // es importante que sea una referencia,asi podemos girar la carta
+	carta &getCarta(int posicion);			// es importante que sea una referencia,asi podemos girar la carta
 	int getPuntos();
+
+
+
 
 	~mano();
 

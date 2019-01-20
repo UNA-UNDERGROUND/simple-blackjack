@@ -1,17 +1,21 @@
 #include "juego.h"
 
-juego::juego()
-{
-	baraja = new mazo();
+
+juego::juego(){
+	baraja = nullptr;
+	listaJugadores = nullptr;
+	dealer = nullptr;
 }
 
-juego::~juego()
-{
+void juego::jugar() {
 
-}
 
-void juego::jugar()
-{
+
+
+	return;
+	/*
+	jugador Jugador("abc");
+
 	string resp, nick2;
 	int nick;
 
@@ -25,7 +29,7 @@ void juego::jugar()
 	{
 		cout << "registrese un nickname" << endl;
 		cin >> nick2;
-		listJuga.insertarInicio(jugador(nick2));
+		listJugadores.insertarInicio(jugador(nick2));
 	}
 
 	cout << "El juego se iniciara" << endl;
@@ -35,18 +39,18 @@ void juego::jugar()
 
 	for (int i = 0; i < nick; i++)
 	{
-		juga->pedirCarta(baraja);
-		juga->pedirCarta(baraja);
+		//Jugador->pedirCarta(baraja);
+		//Jugador->pedirCarta(baraja);
 	}
 	//puntuacion aqui debe de estar
 
-	deal->pedirCarta(baraja);//aqui el dealer pide 2 cartas
-	deal->pedirCarta(baraja);
+	dealer->pedirCarta(baraja);//aqui el dealer pide 2 cartas
+	dealer->pedirCarta(baraja);
 
-	man = listJuga.obtenerJugador(nick).getMano();//para que las manos coincidan con jugador
+	mano = listJugadores.obtenerJugador(nick).getMano();//para que las manos coincidan con jugador
 
-	for (int i = 0; i < man->getCartas(); i++) {
-		carta cart(man->getCarta(i));//carta actual
+	for (int i = 0; i < mano->getCartas(); i++) {
+		carta cart(mano->getCarta(i));//carta actual
 		cout << "" << i + 1 << endl;
 		cout << "codigo:" << cart.getcodigo() << endl;
 		cout << "palo" << cart.getPalo() << endl;
@@ -57,13 +61,13 @@ void juego::jugar()
 	{
 		system("cls");
 
-		for (int i = 0; i < man->getCartas(); i++) {
-			carta cart(man->getCarta(i));//carta actual
+		for (int i = 0; i < mano->getCartas(); i++) {
+			carta cart(mano->getCarta(i));//carta actual
 			cout << "" << i + 1 << endl;
 			cout << "codigo:" << cart.getcodigo() << endl;
 			cout << "palo" << cart.getPalo() << endl;
 		}
-		int puntuacion = man->getPuntos();
+		int puntuacion = mano->getPuntos();
 		cout << "Puntuacion" << puntuacion << endl;
 		if (puntuacion < 21)
 		{
@@ -71,7 +75,7 @@ void juego::jugar()
 			cin >> resp;
 			if (resp == "si")
 			{
-				juga->pedirCarta(baraja);
+				//Jugador->pedirCarta(baraja);
 			}
 			else {
 				break;
@@ -87,23 +91,39 @@ void juego::jugar()
 
 		if (resp == "no")//si todos responden que no pues el dealer le dara vuelta
 		{
-			deal->volteaSegunta();
+			dealer->volteaSegunta();
 		}
 
-		if (juga->getPuntuacion() > deal->getPuntuacion())
+		if (Jugador.getPuntuacion() > dealer->getPuntuacion())
 		{
 			cout << "Has ganado" << endl;
 		}
 
-		if (juga->getPuntuacion() < deal->getPuntuacion())
+		if (Jugador.getPuntuacion() < dealer->getPuntuacion())
 		{
 			cout << "Has perdido" << endl;
 		}
 
-		if (juga->getPuntuacion() == deal->getPuntuacion())
+		if (Jugador.getPuntuacion() == dealer->getPuntuacion())
 		{
 			cout << "Has empatado" << endl;
 		}
 
 	}
+
+	*/
+
 }
+
+juego::~juego(){
+	if (baraja!=nullptr) {
+		delete baraja;
+	}
+	if (listaJugadores != nullptr) {
+		delete listaJugadores;
+	}
+	if (dealer != nullptr) {
+		delete dealer;
+	}
+}
+

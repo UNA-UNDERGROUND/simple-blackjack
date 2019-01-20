@@ -4,47 +4,50 @@
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\UI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\gestorConsola.cpp">
-      <Filter>clases</Filter>
-    </ClCompile>
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\utiles.cpp">
       <Filter>clases</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\carta.cpp">
-      <Filter>clases\BlackJack</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\dealer.cpp">
-      <Filter>clases\BlackJack</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\gestorArchivo.cpp">
-      <Filter>clases\BlackJack</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\juego.cpp">
       <Filter>clases\BlackJack</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\jugador.cpp">
-      <Filter>clases\BlackJack</Filter>
+    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\carta.cpp">
+      <Filter>clases\BlackJack\cartas\carta</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\dealer.cpp">
+      <Filter>clases\BlackJack\jugadores\dealer</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\jugadorGenerico.cpp">
-      <Filter>clases\BlackJack</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\listaCarta.cpp">
-      <Filter>clases\BlackJack</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\listaJugador.cpp">
-      <Filter>clases\BlackJack</Filter>
+      <Filter>clases\BlackJack\jugadores\jugadorGenerico</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\mano.cpp">
-      <Filter>clases\BlackJack</Filter>
+      <Filter>clases\BlackJack\cartas\mano</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\mazo.cpp">
-      <Filter>clases\BlackJack</Filter>
+      <Filter>clases\BlackJack\cartas\mazo</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\listaCarta.cpp">
+      <Filter>clases\BlackJack\cartas\listaCarta</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\nodoCarta.cpp">
-      <Filter>clases\BlackJack</Filter>
+      <Filter>clases\BlackJack\cartas\listaCarta\nodoCarta</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\jugador.cpp">
+      <Filter>clases\BlackJack\jugadores\jugador</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\listaJugador.cpp">
+      <Filter>clases\BlackJack\jugadores\listaJugador</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\nodoJugador.cpp">
-      <Filter>clases\BlackJack</Filter>
+      <Filter>clases\BlackJack\jugadores\listaJugador\nodoJugador</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\gestorArchivo.cpp">
+      <Filter>clases\gestores\archivo</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\gestorConsola.cpp">
+      <Filter>clases\gestores\consola</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gestorGraficos.cpp">
+      <Filter>clases\gestores\graficos</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -57,49 +60,100 @@
     <Filter Include="clases\BlackJack">
       <UniqueIdentifier>{d168fc52-4165-40eb-b5b7-c96724214fcb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="clases\BlackJack\cartas">
+      <UniqueIdentifier>{6ec04ce4-2036-4900-b010-7fae68217452}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clases\BlackJack\jugadores">
+      <UniqueIdentifier>{e46cb45c-78e8-472d-b500-e2a0054f601c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clases\BlackJack\cartas\carta">
+      <UniqueIdentifier>{ec246b6e-64c4-497f-8916-b17eae39942a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clases\BlackJack\jugadores\jugadorGenerico">
+      <UniqueIdentifier>{5bff920b-5576-47a7-80ff-2411b9fedd02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clases\BlackJack\jugadores\dealer">
+      <UniqueIdentifier>{cd5569f8-f33e-43fe-bbfe-af4010ef144a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clases\BlackJack\jugadores\jugador">
+      <UniqueIdentifier>{fda9a50b-4341-4819-a2b6-d867f3462c90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clases\BlackJack\cartas\mano">
+      <UniqueIdentifier>{e8a394f2-121c-49fa-b3a9-1cf5cfcfd50d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clases\BlackJack\cartas\mazo">
+      <UniqueIdentifier>{8bfbef79-bc8b-4c11-aa7c-ff17fda67022}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clases\BlackJack\cartas\listaCarta">
+      <UniqueIdentifier>{be2c8d5a-b7af-4dc9-881a-1ca591ae94e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clases\BlackJack\cartas\listaCarta\nodoCarta">
+      <UniqueIdentifier>{fa8d664b-676b-499a-a646-ec2bf496cf0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clases\BlackJack\jugadores\listaJugador">
+      <UniqueIdentifier>{61a850e1-b55f-435b-8049-8704b35d15b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clases\BlackJack\jugadores\listaJugador\nodoJugador">
+      <UniqueIdentifier>{c40c8081-acd4-4480-9207-844f39beca33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clases\gestores">
+      <UniqueIdentifier>{08c1dbd7-c1e0-4175-842e-6662c1060574}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clases\gestores\archivo">
+      <UniqueIdentifier>{acdebf0a-c6e3-4ffd-bb57-bac7b71372aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clases\gestores\consola">
+      <UniqueIdentifier>{be49ee69-7652-4bfe-a1b6-b0ede7978300}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clases\gestores\graficos">
+      <UniqueIdentifier>{9f4f84a6-0479-4116-b053-908601c28fcd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\gestorConsola.h">
-      <Filter>clases</Filter>
-    </ClInclude>
     <ClInclude Include="source\utiles.h">
       <Filter>clases</Filter>
-    </ClInclude>
-    <ClInclude Include="source\carta.h">
-      <Filter>clases\BlackJack</Filter>
-    </ClInclude>
-    <ClInclude Include="source\dealer.h">
-      <Filter>clases\BlackJack</Filter>
-    </ClInclude>
-    <ClInclude Include="source\gestorArchivo.h">
-      <Filter>clases\BlackJack</Filter>
     </ClInclude>
     <ClInclude Include="source\juego.h">
       <Filter>clases\BlackJack</Filter>
     </ClInclude>
-    <ClInclude Include="source\jugador.h">
-      <Filter>clases\BlackJack</Filter>
+    <ClInclude Include="source\carta.h">
+      <Filter>clases\BlackJack\cartas\carta</Filter>
+    </ClInclude>
+    <ClInclude Include="source\dealer.h">
+      <Filter>clases\BlackJack\jugadores\dealer</Filter>
     </ClInclude>
     <ClInclude Include="source\jugadorGenerico.h">
-      <Filter>clases\BlackJack</Filter>
-    </ClInclude>
-    <ClInclude Include="source\listaCarta.h">
-      <Filter>clases\BlackJack</Filter>
-    </ClInclude>
-    <ClInclude Include="source\listaJugador.h">
-      <Filter>clases\BlackJack</Filter>
+      <Filter>clases\BlackJack\jugadores\jugadorGenerico</Filter>
     </ClInclude>
     <ClInclude Include="source\mano.h">
-      <Filter>clases\BlackJack</Filter>
+      <Filter>clases\BlackJack\cartas\mano</Filter>
     </ClInclude>
     <ClInclude Include="source\mazo.h">
-      <Filter>clases\BlackJack</Filter>
+      <Filter>clases\BlackJack\cartas\mazo</Filter>
+    </ClInclude>
+    <ClInclude Include="source\listaCarta.h">
+      <Filter>clases\BlackJack\cartas\listaCarta</Filter>
     </ClInclude>
     <ClInclude Include="source\nodoCarta.h">
-      <Filter>clases\BlackJack</Filter>
+      <Filter>clases\BlackJack\cartas\listaCarta\nodoCarta</Filter>
+    </ClInclude>
+    <ClInclude Include="source\jugador.h">
+      <Filter>clases\BlackJack\jugadores\jugador</Filter>
+    </ClInclude>
+    <ClInclude Include="source\listaJugador.h">
+      <Filter>clases\BlackJack\jugadores\listaJugador</Filter>
     </ClInclude>
     <ClInclude Include="source\nodoJugador.h">
-      <Filter>clases\BlackJack</Filter>
+      <Filter>clases\BlackJack\jugadores\listaJugador\nodoJugador</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gestorArchivo.h">
+      <Filter>clases\gestores\archivo</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gestorConsola.h">
+      <Filter>clases\gestores\consola</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gestorGraficos.h">
+      <Filter>clases\gestores\graficos</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
