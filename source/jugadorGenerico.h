@@ -32,7 +32,7 @@ public:
 	bool sePaso();
 	virtual bool equivalente(string nickname) = 0;
 	int getPuntuacion();
-	mano* getMano();						//pasamos una copia para evitar modificaciones
+	mano* getMano();						
 
 
 	~jugadorGenerico();

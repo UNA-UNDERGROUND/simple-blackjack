@@ -55,6 +55,16 @@ carta* mazo::tomarCarta(){
     }
     return nullptr;                               // no hay mas cartas disponibles
 }
+void mazo::insertarCarta(carta ref) {
+
+	for (int i = 0; i < 52; i++) {
+		if (Carta[i] != nullptr) {
+			Carta[i] = new carta(ref);
+		}
+	}
+
+}
+
 
 mazo::~mazo(){
     
