@@ -4,9 +4,6 @@
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\UI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\utiles.cpp">
-      <Filter>clases</Filter>
-    </ClCompile>
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\juego.cpp">
       <Filter>clases\BlackJack</Filter>
     </ClCompile>
@@ -48,6 +45,12 @@
     </ClCompile>
     <ClCompile Include="source\gestorGraficos.cpp">
       <Filter>clases\gestores\graficos</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\utiles.cpp">
+      <Filter>clases\otros</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gestorMarcadores.cpp">
+      <Filter>clases\gestores\marcadores</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -108,11 +111,14 @@
     <Filter Include="clases\gestores\graficos">
       <UniqueIdentifier>{9f4f84a6-0479-4116-b053-908601c28fcd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="clases\otros">
+      <UniqueIdentifier>{18371a05-2cf2-4d3b-9359-a5bee5b4cb6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clases\gestores\marcadores">
+      <UniqueIdentifier>{a8073f4e-21e8-47ce-8829-88b6ac138fef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\utiles.h">
-      <Filter>clases</Filter>
-    </ClInclude>
     <ClInclude Include="source\juego.h">
       <Filter>clases\BlackJack</Filter>
     </ClInclude>
@@ -154,6 +160,12 @@
     </ClInclude>
     <ClInclude Include="source\gestorGraficos.h">
       <Filter>clases\gestores\graficos</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utiles.h">
+      <Filter>clases\otros</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gestorMarcadores.h">
+      <Filter>clases\gestores\marcadores</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

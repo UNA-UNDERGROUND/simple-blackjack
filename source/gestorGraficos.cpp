@@ -12,13 +12,12 @@ gestorGraficos::gestorGraficos() {
 
 
 void gestorGraficos::imprimirCarta(carta& ref, int x, int y,bool vacia) {
-	std::wstring simbolo;
-
+	consolaSalida.cambiarColor(blanco);
 
 	//nos dirigimos a la posicion inicial
 	consolaSalida.gotoXY(x, y);
 
-
+	if (!vacia) {
 	wcout << L"╔═══════╗";
 	for (int i = 0; i < 5; i++) {
 		consolaSalida.gotoXY(x, y + i + 1);
@@ -29,7 +28,7 @@ void gestorGraficos::imprimirCarta(carta& ref, int x, int y,bool vacia) {
 
 
 
-	if (!vacia) {
+
 		if (ref.revelada()) {
 			//nos dirigimos al centro
 			consolaSalida.gotoXY(x + 4, y + 3);
@@ -51,7 +50,13 @@ void gestorGraficos::imprimirCarta(carta& ref, int x, int y,bool vacia) {
 
 
 			consolaSalida.cambiarColor(celeste, negro);
-			consolaSalida.gotoXY(x + 7, y + 5);
+
+			if (nombreCarta[ref.getcodigo()] == nombreCarta[10]) {
+				consolaSalida.gotoXY(x + 6, y + 5);
+			}
+			else {
+				consolaSalida.gotoXY(x + 7, y + 5);
+			}
 			wcout << nombreCarta[ref.getcodigo()];
 			consolaSalida.gotoXY(x + 1, y + 1);
 			wcout << nombreCarta[ref.getcodigo()];
@@ -68,7 +73,19 @@ void gestorGraficos::imprimirCarta(carta& ref, int x, int y,bool vacia) {
 			consolaSalida.gotoXY(x + 1, y + 1);
 		}
 	}
+	else {
+		consolaSalida.cambiarColor(verde);
 
+		wcout << L"▒▒▒▒▒▒▒▒▒";
+		for (int i = 0; i < 5; i++) {
+			consolaSalida.gotoXY(x, y + i + 1);
+
+			wcout << L"▒▒▒▒▒▒▒▒▒";
+		}
+		consolaSalida.gotoXY(x, y + 6);
+
+		wcout << L"▒▒▒▒▒▒▒▒▒";
+	}
 
 
 	consolaSalida.cambiarColor(blanco, negro);
@@ -149,6 +166,118 @@ void gestorGraficos::dibujarLogo(int xLogo, int yLogo) {
 
 }
 
+void gestorGraficos::limpiarSector(int x1, int y1, int x2, int y2) {
+
+	//limpiamos los contenidos anteriores
+
+	for (int y = y1; y <= y2; y++) {
+		consolaSalida.gotoXY(x1, y);
+		for (int x = x1; x <= x2; x++) {
+			wprintf(L" ");					//queremos limpiar la pantalla lo mas rapido posible y wprintf es mas sencillo que wcout,pero es más rapido
+		}
+
+	}
+
+
+
+
+}
+
+
+
+
+void gestorGraficos::mostrarInfoUsuario(wstring nick, mano& manoJugador, bool esDealer){
+	consolaSalida.cambiarColor(negro, grisOscuro);
+
+	if (!esDealer) {
+
+		limpiarSector(2, 1, 60, 1);		//limpiamos los datos anteriores
+
+		consolaSalida.gotoXY(2, 1);
+		wcout << "Jugador Actual: " << nick;
+
+		consolaSalida.gotoXY(30, 1);
+		wcout << "puntuacion: " << manoJugador.getPuntos();
+
+		consolaSalida.gotoXY(46, 1);
+		wcout << "cartas: " << manoJugador.getCartas();
+	}
+	else {
+
+		consolaSalida.gotoXY(80, 0);
+		wcout << "Dealer :        " << nick;
+
+		consolaSalida.gotoXY(80, 1);
+		wcout << "puntuacion:     ";
+		if (manoJugador.getCarta(1).revelada()) {
+			wcout << manoJugador.getPuntos();
+		}
+		else {
+			wcout << "?";
+		}
+
+		consolaSalida.gotoXY(80, 2);
+		wcout << "cartas:         " << manoJugador.getCartas();
+
+
+
+	}
+
+
+	
+
+	consolaSalida.cambiarColor(negro);
+
+}
+
+void gestorGraficos::mostrarJugadorSecundario(wstring nick, listaJugador& jugadores, int ubicacion,int posicion) {
+
+
+	int posicionY = (2 * (posicion + 1)) + 4 * posicion; //ubicacion de la esquina*(posicion deseada)+separacion entre jugadoresSecundarios
+
+	//limpiamos los campos antes de usarlos
+	limpiarSector(4, posicionY, 60, posicionY + 5);
+
+	jugadorGenerico *Actual = &jugadores.obtenerJugador(ubicacion);
+
+
+	if (Actual->getMano() != nullptr){
+		consolaSalida.gotoXY(4, posicionY++);
+		wcout << "jugador#" << ubicacion;
+		consolaSalida.gotoXY(4, posicionY++);
+		wcout << "nickname:         " << nick;
+		consolaSalida.gotoXY(4, posicionY++);
+		wcout << "Puntuacion:       " << Actual->getPuntuacion();
+		consolaSalida.gotoXY(4, posicionY++);
+		wcout << "Numero de Cartas: " << Actual->getMano()->getCartas();
+		consolaSalida.gotoXY(4, posicionY);
+		wcout << "cartas:           ";
+		carta *cartaActual;
+		int numeroCartas = Actual->getMano()->getCartas();
+		for (int j = 0; j < numeroCartas; j++) {
+				cartaActual = &Actual->getMano()->getCarta(j);
+				wcout << nombreCarta[cartaActual->getcodigo()] << simboloPalo[cartaActual->getPalo()];
+				wcout << ((j + 1) != numeroCartas? ", ":".");	
+			}
+	}
+
+
+	
+
+}
+bool gestorGraficos::eleccion() {
+	boton botonEntrada = Desconocido;
+	do {
+		botonEntrada = capturarEntrada();
+	} while (botonEntrada != Boton1 && botonEntrada != Boton2);
+
+	if (botonEntrada == Boton1) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
 
 int gestorGraficos::menuPrincipal() {
 
@@ -373,51 +502,195 @@ void gestorGraficos::mostrarMesa() {
 
 
 	//dibujamos la parte de arriba
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < 3; i++) {
 		consolaSalida.gotoXY(0, i);
 		for (int j = 0; j < 120; j++) {
 			wcout << L"█";
 		}
 	}
 
-	consolaSalida.cambiarColor(negro,grisOscuro);
+	consolaSalida.cambiarColor(negro, grisOscuro);
 
 
 	consolaSalida.gotoXY(0, 28);
 
-	wcout << "		(z)Pedir carta - (x)Pasar - (c)Guardar Partida - (S)alir";
+	wcout << "		(z)Pedir carta - (x)Pasar - (c)Guardar Partida - (Esc)Salir";
 
 	consolaSalida.cambiarColor(blanco);
 
 
 }
-void gestorGraficos::mostrarMano(mano &manoJugador,int pagina) {
-
+void gestorGraficos::mostrarMano(mano &manoJugador, int pagina, bool esDealer) {
 	carta cartaVacia;
 	cartaVacia.voltear();
 
-	for (int i = 0; i < 4; i++) {
 
-		carta *cartaJugador = &manoJugador.getCarta((pagina * 4) + i);
+	if (!esDealer) {
 
-		if (cartaJugador->equivalente(cartaVacia)) {
-			imprimirCarta(cartaVacia, (i * 5) + (i * 6) + 8, 20, true);
+
+		for (int i = 0; i < 4; i++) {
+
+			carta *cartaJugador = &manoJugador.getCarta((pagina * 4) + i);
+
+			if (cartaJugador->equivalente(cartaVacia)) {
+				imprimirCarta(cartaVacia, (i * 5) + (i * 6) + 16, 20, true);
+			}
+			else {
+				imprimirCarta(*cartaJugador, (i * 5) + (i * 6) + 16, 20);
+			}
+
+
 		}
-		else {
-			imprimirCarta(*cartaJugador, (i * 5) + (i * 6) + 8, 20);
+
+
+		if (manoJugador.getCartas() > 4) {
+
+			consolaSalida.gotoXY(0, 23);
+			if (pagina != 0) {
+				wcout << L"[ A / ← ] Atras";
+			}
+			else {
+				wcout << "                ";
+			}
+
+			consolaSalida.gotoXY(60, 23);
+			if (pagina != manoJugador.getCartas() / 4) {
+				wcout << L"[ D / → ] Adelante";
+			}
+			else {
+				wcout << "                  ";
+			}
+
+
+
 		}
 
+	}
+	else {
+		for (int i = 0; i < 2; i++) {
+
+			carta *cartaJugador = &manoJugador.getCarta((pagina * 2) + i);
+
+			if (cartaJugador->equivalente(cartaVacia)) {
+				imprimirCarta(cartaVacia, (i * 5) + (i * 6) + 96, 6, true);
+			}
+			else {
+				imprimirCarta(*cartaJugador, (i * 5) + (i * 6) + 96, 6);
+			}
+
+
+		}
+
+
+		if (manoJugador.getCartas() > 2) {
+
+			consolaSalida.gotoXY(76, 8);
+			if (pagina != 0) {
+				wcout << "[ Q / <-] Atras";
+			}
+			else {
+				wcout << "                ";
+			}
+			consolaSalida.gotoXY(76, 10);
+			if (pagina != manoJugador.getCartas() / 2) {
+				wcout << "[ E / ->] Adelante";
+			}
+			else {
+				wcout << "                  ";
+			}
+
+
+		}
 
 	}
 
 
-	if (manoJugador.getCartas() > 4){
-		consolaSalida.gotoXY(52, 2);
-		wcout << "[A]tras";
-	}
+
+
 
 
 }
+
+void gestorGraficos::mostrarJugadoresSecundarios(listaJugador& jugadores, int pagina, int jugadorActual) {
+
+	consolaSalida.cambiarColor(blanco);
+
+	consolaSalida.gotoXY(4, 4);
+	wcout << "Pagina #" << pagina + 1 << "   ";
+
+	int insertados = 0;
+	int posicion = (pagina*2);
+	int fin = jugadores.insertados();
+
+	while (insertados < 2 && posicion != fin) {
+		if (posicion != 0 && posicion != jugadorActual) {
+			mostrarJugadorSecundario(s2ws(jugadores.obtenerJugador(posicion).getNickname()), jugadores, posicion, ++insertados);
+		}
+		posicion++;
+	}
+
+
+	for (int i = 0; i < 2; i++) {
+		int numeroJugador = (pagina * 2) + i;
+	}
+
+
+	if (jugadores.insertados() > 2) {
+
+		consolaSalida.gotoXY(40, 6);
+		if (pagina != 0) {
+			wcout << L"[ W / ↑ ] Arriba";
+		}
+		else {
+			wcout << "                ";
+		}
+
+		consolaSalida.gotoXY(40, 8);
+		if (pagina != jugadores.insertados() / 2) {
+			wcout << L"[ S / ↓ ] Abajo";
+		}
+		else {
+			wcout << "                  ";
+		}
+	}
+
+}
+
+bool gestorGraficos::dialogoSalida() {
+
+	consolaSalida.gotoXY(15, 28);
+	consolaSalida.cambiarColor(negro, grisOscuro);
+	wcout << "¿ Desea salir del Juego ?		(Q)Si.		(E)No.";
+	for (int i = 0; i < 40; i++) {
+		wcout << " ";
+	}
+	consolaSalida.cambiarColor(blanco);
+
+	return eleccion();
+}
+bool gestorGraficos::dialogoSalto() {
+
+	consolaSalida.gotoXY(15, 28);
+	consolaSalida.cambiarColor(negro, grisOscuro);
+	wcout << "¿ Desea pasar su turno ?		(Q)Si.		(E)No.";
+	for (int i = 0; i < 40; i++) {
+		wcout << " ";
+	}
+	consolaSalida.cambiarColor(blanco);
+
+	return eleccion();
+
+}
+int gestorGraficos::dialogoCantidadJugadores() {
+
+
+
+
+
+
+}
+
+
 
 gestorGraficos::~gestorGraficos() {
 

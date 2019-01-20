@@ -10,6 +10,9 @@
 #include <future>
 #include <string>
 
+#include <codecvt>
+#include <string>
+
 using std::string;
 using std::wstring;			//variante estandar de string
 using std::wcout;			//variante estandar de cout
@@ -27,6 +30,7 @@ using std::wcout;			//variante estandar de cout
 // limpart pantalla extraido de :					https://support.microsoft.com/en-us/help/99261/how-to-performing-clear-screen-cls-in-a-console-application
 // lectura en segundo plano extraido y badado de:	https://gist.github.com/vmrob/ff20420a20c59b5a98a1
 //													http://www.cplusplus.com/reference/future/future/wait_for/
+		
 
 
 
@@ -53,12 +57,11 @@ enum boton {
 	Abajo,
 	Derecha,
 	Izquierda,
-	Boton1,
-	Boton2,
-	Boton3,
-	Boton4,
-	Boton5,
-	Boton6,
+	Boton1,		// q
+	Boton2,		// e
+	Boton3,		// z
+	Boton4,		// x
+	Boton5,		// c
 	Atras,
 	Adelante,
 	Desconocido
@@ -91,10 +94,5 @@ void consolaUnicode(bool activada = true);
 boton capturarEntrada();
 
 
-
-
-
-
-
-
+wstring s2ws(string ref);
 

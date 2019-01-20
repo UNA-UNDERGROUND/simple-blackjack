@@ -90,7 +90,7 @@ jugadorGenerico& listaJugador::obtenerJugador(int posicion) {
 	if (listaVacia()) {
 		return jugadorVacio;
 	}
-	if (posicion < 0 || posicion > insertados()) {
+	if (posicion + 1 < 0 || posicion + 1 > insertados()){
 		return jugadorVacio;
 	}
 	nodoJugador * actual = inicio;

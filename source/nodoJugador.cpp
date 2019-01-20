@@ -29,8 +29,6 @@ nodoJugador::~nodoJugador() {
 		delete actual;
 		actual = nullptr;
 	}
-
-
 }
 
 
