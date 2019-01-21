@@ -26,7 +26,7 @@ private:
 	int paginaJugadores = 0;
 
 	void pantallaJuego();			//aqui se lleva la logica del juego, por lo tanto este metodo se encarga de la gestion de los juegos nuevo y los juegos cargados una vez inicializados
-
+	void pantallaFinDelJuego();
 
 public:
 	juego();

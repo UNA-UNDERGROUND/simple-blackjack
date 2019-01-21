@@ -165,6 +165,74 @@ void gestorGraficos::dibujarLogo(int xLogo, int yLogo) {
 
 
 }
+void gestorGraficos::animarLogo() {
+	consolaSalida.cambiarColor(colorLuz);
+	for (int i = 0; i < 4; i++) {
+		consolaSalida.gotoXY(puntoX[i], puntoY[i]);
+		wcout << L"▓";
+
+		if (puntoX[i] == 24) {
+			consolaSalida.gotoXY(puntoX[i] - 1, puntoY[i]);
+			wcout << L"▓";
+		}
+		else if (puntoX[i] == 97) {
+			wcout << L"▓";
+		}
+
+		if (puntoX[i] == 24 && puntoY[i] != 15) {
+			puntoY[i]++;
+		}
+		else if (puntoX[i] != 97 && puntoY[i] == 15) {
+			puntoX[i]++;
+		}
+		else if (puntoX[i] == 97 && puntoY[i] != 8) {
+			puntoY[i]--;
+		}
+		else {
+			puntoX[i]--;
+		}
+
+
+
+	}
+	consolaSalida.cambiarColor(blanco);
+
+	if (puntosRestantes == 0) {
+		if (colorLuz == rojo) {
+			colorLuz = celeste;
+		}
+		else if (colorLuz == celeste) {
+			colorLuz = verde;
+		}
+		else if (colorLuz == verde) {
+			colorLuz = amarillo;
+		}
+		else {
+			colorLuz = rojo;
+		}
+
+		//cambiar la luz en cada inicio
+		if (puntoX[0] == 24 && puntoY[0] == 8) {
+			if (colorLuz == rojo) {
+				colorLuz = celeste;
+			}
+			else if (colorLuz == celeste) {
+				colorLuz = verde;
+			}
+			else if (colorLuz == verde) {
+				colorLuz = amarillo;
+			}
+			else {
+				colorLuz = rojo;
+			}
+		}
+
+		puntosRestantes = 3;
+	}
+	else {
+		puntosRestantes--;
+	}
+}
 
 void gestorGraficos::limpiarSector(int x1, int y1, int x2, int y2) {
 
@@ -186,7 +254,7 @@ void gestorGraficos::limpiarSector(int x1, int y1, int x2, int y2) {
 
 
 
-void gestorGraficos::mostrarInfoUsuario(wstring nick, mano& manoJugador, bool esDealer){
+void gestorGraficos::mostrarInfoJugador(jugadorGenerico &jugadorActual, bool esDealer){
 	consolaSalida.cambiarColor(negro, grisOscuro);
 
 	if (!esDealer) {
@@ -194,30 +262,30 @@ void gestorGraficos::mostrarInfoUsuario(wstring nick, mano& manoJugador, bool es
 		limpiarSector(2, 1, 60, 1);		//limpiamos los datos anteriores
 
 		consolaSalida.gotoXY(2, 1);
-		wcout << "Jugador Actual: " << nick;
+		wcout << "Jugador Actual: " << s2ws(jugadorActual.getNickname());
 
 		consolaSalida.gotoXY(30, 1);
-		wcout << "puntuacion: " << manoJugador.getPuntos();
+		wcout << "puntuacion: " << jugadorActual.getMano()->getPuntos();
 
 		consolaSalida.gotoXY(46, 1);
-		wcout << "cartas: " << manoJugador.getCartas();
+		wcout << "cartas: " << jugadorActual.getMano()->getCartas();
 	}
 	else {
 
 		consolaSalida.gotoXY(80, 0);
-		wcout << "Dealer :        " << nick;
+		wcout << "Dealer :        " << s2ws(jugadorActual.getNickname());
 
 		consolaSalida.gotoXY(80, 1);
 		wcout << "puntuacion:     ";
-		if (manoJugador.getCarta(1).revelada()) {
-			wcout << manoJugador.getPuntos();
+		if (jugadorActual.getMano()->getCarta(1).revelada()) {
+			wcout << jugadorActual.getMano()->getPuntos();
 		}
 		else {
 			wcout << "?";
 		}
 
 		consolaSalida.gotoXY(80, 2);
-		wcout << "cartas:         " << manoJugador.getCartas();
+		wcout << "cartas:         " << jugadorActual.getMano()->getCartas();
 
 
 
@@ -237,6 +305,7 @@ void gestorGraficos::mostrarJugadorSecundario(wstring nick, listaJugador& jugado
 
 	//limpiamos los campos antes de usarlos
 	limpiarSector(4, posicionY, 60, posicionY + 5);
+	//limpiarSector(4, 6, 60, 18);
 
 	jugadorGenerico *Actual = &jugadores.obtenerJugador(ubicacion);
 
@@ -262,7 +331,7 @@ void gestorGraficos::mostrarJugadorSecundario(wstring nick, listaJugador& jugado
 	}
 
 
-	
+
 
 }
 bool gestorGraficos::eleccion() {
@@ -294,14 +363,6 @@ int gestorGraficos::menuPrincipal() {
 		cartas[i].voltear();
 	}
 
-
-	int puntoX[] = { 24,97,60,60 };
-	int puntoY[] = { 15,8,15,8 };
-
-
-	color colorLuz = rojo;
-	int puntosRestantes = 3; //detemina la longitud de una luz especifica
-
 	int xCartas = 0;
 	int yCartas = 0;
 
@@ -316,9 +377,6 @@ int gestorGraficos::menuPrincipal() {
 	imprimirCarta(cartas[3], xCartas -= 5, yCartas -= 2);
 	imprimirCarta(cartas[2], xCartas -= 5, yCartas -= 2);
 
-	dibujarLogo(25, 9);
-
-
 
 	int eleccion = 0;
 
@@ -329,163 +387,45 @@ int gestorGraficos::menuPrincipal() {
 	wcout << "flecha arriba/w:      moverse arriba." << endl;
 	wcout << "flecha abajo/s:       moverse abajo.";
 
+	dibujarLogo(25, 9);
 
-	while (true) {
-
-
-		{
-			consolaSalida.gotoXY(55, 18);
-			if (eleccion == 0) {
-				consolaSalida.cambiarColor(negro, gris);
-			}
-			wcout << "nueva  partida ";
-			consolaSalida.cambiarColor(blanco);
-			consolaSalida.gotoXY(55, 19);
-
-
-			if (eleccion == 1) {
-				consolaSalida.cambiarColor(negro, gris);
-			}
-			wcout << "cargar partida ";
-			consolaSalida.cambiarColor(blanco);
-			consolaSalida.gotoXY(55, 20);
-
-
-			if (eleccion == 2) {
-				consolaSalida.cambiarColor(negro, gris);
-			}
-			wcout << "  Marcadores   ";
-			consolaSalida.cambiarColor(blanco);
-
-
-			if (eleccion == 3) {
-				consolaSalida.cambiarColor(negro, gris);
-			}
-			consolaSalida.gotoXY(55, 21);
-
-			wcout << "     Salir     ";
-			consolaSalida.cambiarColor(blanco);
-
+	do {
+		consolaSalida.gotoXY(55, 18);
+		if (eleccion == 0) {
+			consolaSalida.cambiarColor(negro, gris);
 		}
+		wcout << "nueva  partida ";
+		consolaSalida.cambiarColor(blanco);
+		consolaSalida.gotoXY(55, 19);
 
 
-		consolaSalida.gotoXY(0, 8);
-
-
-		//int entrada = capturarEntrada();
-		int entrada = 0;
-
-		auto future = std::async(std::launch::async, capturarEntrada);
-		while (future.wait_for(std::chrono::milliseconds(75)) == std::future_status::timeout) {
-
-			//durante este tiempo podemos realizar algo rapido como animar el titulo
-
-			consolaSalida.cambiarColor(colorLuz);
-			for (int i = 0; i < 4; i++) {
-				consolaSalida.gotoXY(puntoX[i], puntoY[i]);
-				wcout << L"▓";
-
-				if (puntoX[i] == 24) {
-					consolaSalida.gotoXY(puntoX[i] - 1, puntoY[i]);
-					wcout << L"▓";
-				}
-				else if (puntoX[i] == 97) {
-					wcout << L"▓";
-				}
-
-				if (puntoX[i] == 24 && puntoY[i] != 15) {
-					puntoY[i]++;
-				}
-				else if (puntoX[i] != 97 && puntoY[i] == 15) {
-					puntoX[i]++;
-				}
-				else if (puntoX[i] == 97 && puntoY[i] != 8) {
-					puntoY[i]--;
-				}
-				else {
-					puntoX[i]--;
-				}
-
-
-
-			}
-			consolaSalida.cambiarColor(blanco);
-
-			if (puntosRestantes == 0) {
-				if (colorLuz == rojo) {
-					colorLuz = celeste;
-				}
-				else if (colorLuz == celeste) {
-					colorLuz = verde;
-				}
-				else if (colorLuz == verde) {
-					colorLuz = amarillo;
-				}
-				else {
-					colorLuz = rojo;
-				}
-
-				//cambiar la luz en cada inicio
-				if (puntoX[0] == 24 && puntoY[0] == 8) {
-					if (colorLuz == rojo) {
-						colorLuz = celeste;
-					}
-					else if (colorLuz == celeste) {
-						colorLuz = verde;
-					}
-					else if (colorLuz == verde) {
-						colorLuz = amarillo;
-					}
-					else {
-						colorLuz = rojo;
-					}
-				}
-
-				puntosRestantes = 3;
-			}
-			else {
-				puntosRestantes--;
-			}
-
-
+		if (eleccion == 1) {
+			consolaSalida.cambiarColor(negro, gris);
 		}
+		wcout << "cargar partida ";
+		consolaSalida.cambiarColor(blanco);
+		consolaSalida.gotoXY(55, 20);
 
-		entrada = future.get();
 
-		switch (entrada) {
-		case Arriba:
-			if (eleccion != 0) {
-				eleccion--;
-			}
-			else {
-				eleccion = 3;
-			}
-
-			break;
-		case Abajo:
-			if (eleccion != 3) {
-				eleccion++;
-			}
-			else {
-				eleccion = 0;
-			}
-
-			break;
-
-		case Adelante:
-			consolaSalida.limpiarPantalla();
-			return eleccion;
-			break;
-		default:
-		{
-
-			break;
+		if (eleccion == 2) {
+			consolaSalida.cambiarColor(negro, gris);
 		}
+		wcout << "  Marcadores   ";
+		consolaSalida.cambiarColor(blanco);
+
+
+		if (eleccion == 3) {
+			consolaSalida.cambiarColor(negro, gris);
 		}
+		consolaSalida.gotoXY(55, 21);
+
+		wcout << "     Salir     ";
+		consolaSalida.cambiarColor(blanco);
+
+	} while (!animacionLogo(eleccion, 3));
 
 
-
-	}
+	return eleccion;
 }
 void gestorGraficos::mostrarMesa() {
 
@@ -613,14 +553,22 @@ void gestorGraficos::mostrarMano(mano &manoJugador, int pagina, bool esDealer) {
 
 void gestorGraficos::mostrarJugadoresSecundarios(listaJugador& jugadores, int pagina, int jugadorActual) {
 
+	int insertados = 0;
+	int posicion = (pagina * 2);
+	int fin = jugadores.insertados();
+
+	consolaSalida.gotoXY(2, 3);
 	consolaSalida.cambiarColor(blanco);
 
-	consolaSalida.gotoXY(4, 4);
-	wcout << "Pagina #" << pagina + 1 << "   ";
+	wcout << "numero de jugadores: " << fin - 1;
 
-	int insertados = 0;
-	int posicion = (pagina*2);
-	int fin = jugadores.insertados();
+	limpiarSector(4, 4, 60, 18);
+
+	consolaSalida.gotoXY(4, 4);
+
+	if (fin > 4) {
+		wcout << "Pagina #" << pagina + 1 << "   ";
+	}
 
 	while (insertados < 2 && posicion != fin) {
 		if (posicion != 0 && posicion != jugadorActual) {
@@ -635,7 +583,7 @@ void gestorGraficos::mostrarJugadoresSecundarios(listaJugador& jugadores, int pa
 	}
 
 
-	if (jugadores.insertados() > 2) {
+	if (jugadores.insertados() > 4) {
 
 		consolaSalida.gotoXY(40, 6);
 		if (pagina != 0) {
@@ -652,6 +600,10 @@ void gestorGraficos::mostrarJugadoresSecundarios(listaJugador& jugadores, int pa
 		else {
 			wcout << "                  ";
 		}
+	}
+
+	if (insertados < 2) {
+		limpiarSector(4, 14, 60, 18);
 	}
 
 }
@@ -681,15 +633,182 @@ bool gestorGraficos::dialogoSalto() {
 	return eleccion();
 
 }
+
 int gestorGraficos::dialogoCantidadJugadores() {
 
+	limpiarSector(55, 18, 80, 23);
+
+	int eleccion = 0;
+
+	do {
+
+		int posicionInicial = 18;
+
+		consolaSalida.gotoXY(55, posicionInicial++);
+		if (eleccion == 0) {
+			consolaSalida.cambiarColor(negro, gris);
+		}
+		wcout << "Atras        ";
+		consolaSalida.cambiarColor(blanco);
+		consolaSalida.gotoXY(55, posicionInicial++);
+
+
+		if (eleccion == 1) {
+			consolaSalida.cambiarColor(negro, gris);
+		}
+		wcout << "1 Jugador.   ";
+		consolaSalida.cambiarColor(blanco);
+		consolaSalida.gotoXY(55, posicionInicial++);
+
+
+		if (eleccion == 2) {
+			consolaSalida.cambiarColor(negro, gris);
+		}
+		wcout << "2 Jugadores. ";
+		consolaSalida.cambiarColor(blanco);
+
+
+		if (eleccion == 3) {
+			consolaSalida.cambiarColor(negro, gris);
+		}
+		consolaSalida.gotoXY(55, posicionInicial++);
+
+		wcout << "3 Jugadores. ";
+		consolaSalida.cambiarColor(blanco);
+
+		if (eleccion == 4) {
+			consolaSalida.cambiarColor(negro, gris);
+		}
+		consolaSalida.gotoXY(55, posicionInicial++);
+
+		wcout << "4 Jugadores. ";
+		consolaSalida.cambiarColor(blanco);
+
+		if (eleccion == 5) {
+			consolaSalida.cambiarColor(negro, gris);
+		}
+		consolaSalida.gotoXY(55, posicionInicial++);
+
+		wcout << "5 Jugadores. ";
+		consolaSalida.cambiarColor(blanco);
+
+		if (eleccion == 6) {
+			consolaSalida.cambiarColor(negro, gris);
+		}
+		consolaSalida.gotoXY(55, posicionInicial++);
+
+		wcout << "6 Jugadores. ";
+		consolaSalida.cambiarColor(blanco);
+
+		if (eleccion == 7) {
+			consolaSalida.cambiarColor(negro, gris);
+		}
+		consolaSalida.gotoXY(55, posicionInicial);
+
+		wcout << "7 Jugadores. ";
 
 
 
 
+	} while (!animacionLogo(eleccion, 7));
+
+
+	if (eleccion!=0) {
+		//limpiarSector(0, 3, 120, 27);
+		consolaSalida.limpiarPantalla();		//es mas rapido que limpiar un sector cuando el sector es bastante grande
+
+	}
+
+	return eleccion;
+}
+
+void gestorGraficos::mostrarFinDelJuego(listaJugador& jugadores, int posicionGanador, bool empate) {
+
+
+	consolaSalida.limpiarPantalla();
+
+
+	int cantidadJugadores = jugadores.insertados();
+
+	jugadorGenerico *jugadorActual;
+	for (int i = 0; i < cantidadJugadores; i++) {
+		consolaSalida.gotoXY(2, 2 + i);
+		jugadorActual = &jugadores.obtenerJugador(i);
+		wcout << s2ws(jugadorActual->getNickname()) << ", puntuación: " << jugadorActual->getPuntuacion();
+	}
+	consolaSalida.gotoXY(40, 2);
+
+
+		if (empate) {
+			wcout << "ocurrio un empate";
+		}
+		else {
+			if (posicionGanador != 0) {
+				wcout << "gano el jugador #" << posicionGanador;
+			}
+			else {
+				wcout << "Gana la casa.";
+			}
+
+		}
+		consolaSalida.gotoXY(40, 3);
+		wcout << "con una puntuacion de: " << jugadores.obtenerJugador(posicionGanador).getPuntuacion();
+	
 
 }
 
+bool gestorGraficos::animacionLogo(int& eleccion,int limite) {
+
+	while (true) {
+
+		int entrada = 0;
+
+		auto future = std::async(std::launch::async, capturarEntrada);
+		while (future.wait_for(std::chrono::milliseconds(75)) == std::future_status::timeout) {
+
+			//durante este tiempo podemos realizar algo rapido como animar el titulo o cualquier otra tarea mientras no se realize una accion del usuario
+			animarLogo();
+		}
+
+		entrada = future.get();
+
+		switch (entrada) {
+		case Arriba:
+			if (eleccion != 0) {
+				eleccion--;
+			}
+			else {
+				eleccion = limite;
+			}
+			return false;
+			break;
+		case Abajo:
+			if (eleccion != limite) {
+				eleccion++;
+			}
+			else {
+				eleccion = 0;
+			}
+			return false;
+			break;
+
+		case Adelante:
+			//consolaSalida.limpiarPantalla();
+			return true;
+			break;
+		default:
+		{
+
+			break;
+		}
+		}
+
+
+
+	}
+
+
+}
 
 
 gestorGraficos::~gestorGraficos() {

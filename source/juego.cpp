@@ -21,7 +21,17 @@ void juego::pantallaJuego() {
 
 	//mostramos la mano del dealer
 	gestorPantalla.mostrarMano(*Dealer->getMano(), paginaDealer, true);
-	gestorPantalla.mostrarInfoUsuario(s2ws(Dealer->getNickname()), *Dealer->getMano(), true);
+	gestorPantalla.mostrarInfoJugador(*Dealer, true);
+
+
+	//mostramos los ultimos datos del turno (turno #1 si es una partida nueva)
+	jugadorActual = &listaJugadores->obtenerJugador(turnoJugador);
+
+	gestorPantalla.mostrarInfoJugador(*jugadorActual);
+	gestorPantalla.mostrarMano(*jugadorActual->getMano(), pagina);
+
+
+
 
 
 	//el dealer es el primero en la lista, por lo tanto se inicia desde el turno de los datos guardados (#1 si es un juego nuevo)
@@ -29,12 +39,10 @@ void juego::pantallaJuego() {
 
 		jugadorActual = &listaJugadores->obtenerJugador(turnoActual);
 
-		gestorPantalla.mostrarInfoUsuario(s2ws(jugadorActual->getNickname()), *jugadorActual->getMano());
-		gestorPantalla.mostrarMano(*jugadorActual->getMano(), pagina);
-
-
+		gestorPantalla.mostrarMesa();
+		gestorPantalla.mostrarInfoJugador(*jugadorActual);
+		gestorPantalla.mostrarInfoJugador(*Dealer, true);
 		gestorPantalla.mostrarJugadoresSecundarios(*listaJugadores, paginaJugadores, turnoActual);
-
 
 		boton botonEleccion = boton::Desconocido;
 		do {
@@ -42,48 +50,66 @@ void juego::pantallaJuego() {
 
 			botonEleccion = capturarEntrada();
 			switch (botonEleccion) {
-			case Izquierda:
+			case Izquierda:{
 				if (pagina != 0) {
 					pagina--;
 					gestorPantalla.mostrarMano(*jugadorActual->getMano(), pagina);
 				}
 				break;
-			case Derecha:
+			}
+			case Derecha:{
 				if (pagina != jugadorActual->getMano()->getCartas() / 4) {
 					pagina++;
 					gestorPantalla.mostrarMano(*jugadorActual->getMano(), pagina);
 				}
 				break;
-			case Arriba:
-				if (paginaJugadores != 0) {
+			}
+			case Arriba:{
+				if (paginaJugadores != 0 && jugadores > 3) {
 					paginaJugadores--;
 					gestorPantalla.mostrarJugadoresSecundarios(*listaJugadores, paginaJugadores, turnoActual);
 				}
 				break;
-			case Abajo:
-				if (paginaJugadores != jugadores / 2) {
+			}
+			case Abajo:{
+				//se le restan 1 ya que el dealer y el jugador actual no cuentan 
+				if (paginaJugadores != (jugadores) / 2 && jugadores > 3) {
 					paginaJugadores++;
 					gestorPantalla.mostrarJugadoresSecundarios(*listaJugadores, paginaJugadores, turnoActual);
 				}
 				break;
-			case Boton1:	// Q
+			}
+			case Boton1: {	// Q
 				if (paginaDealer != 0) {
 					paginaDealer--;
-					gestorPantalla.mostrarInfoUsuario(s2ws(Dealer->getNickname()), *Dealer->getMano(), true);
+					gestorPantalla.mostrarInfoJugador(*Dealer, true);
 				}
 				break;
-			case Boton2:	// E
+			}
+			case Boton2: {	// E
 				if (paginaDealer != jugadorActual->getMano()->getCartas() / 4) {
 					paginaDealer++;
-					gestorPantalla.mostrarInfoUsuario(s2ws(Dealer->getNickname()), *Dealer->getMano(), true);
+					gestorPantalla.mostrarInfoJugador(*Dealer, true);
 				}
 				break;
+			}
+			case Boton3: { // Z - pedir carta
+			
+				jugadorActual->pedirCarta(mazoCartas);
+				if (jugadorActual->getPuntuacion() >= 21) {
+					botonEleccion = boton::Atras; // cambiar de turno
+					
+				}
+				else {
+					gestorPantalla.mostrarInfoJugador(*jugadorActual);
+					gestorPantalla.mostrarMano(*jugadorActual->getMano(), pagina);
+				}
 
-			case Boton3:	// Z
+
+
 				break;
-
-			case Boton4:
-			{	// X - saltar partida
+			}
+			case Boton4:{	// X - saltar turno
 
 				if (!gestorPantalla.dialogoSalto()) {
 					botonEleccion = boton::Desconocido;
@@ -92,23 +118,17 @@ void juego::pantallaJuego() {
 				else {
 					botonEleccion = boton::Atras; // cambiar de turno
 				}
-
-				gestorPantalla.mostrarMesa();
-				gestorPantalla.mostrarInfoUsuario(s2ws(jugadorActual->getNickname()), *jugadorActual->getMano());
-				gestorPantalla.mostrarInfoUsuario(s2ws(Dealer->getNickname()), *Dealer->getMano(), true);
-
-
 				break;
 			}
 			case Boton5:	// C
 				break;
-			case Atras:
+			case Atras:{
 
 				if (!gestorPantalla.dialogoSalida()) {
 					botonEleccion = boton::Desconocido; // esto evitara que salgamos del programa
 					gestorPantalla.mostrarMesa();
-					gestorPantalla.mostrarInfoUsuario(s2ws(jugadorActual->getNickname()), *jugadorActual->getMano());
-					gestorPantalla.mostrarInfoUsuario(s2ws(Dealer->getNickname()), *Dealer->getMano(), true);
+					gestorPantalla.mostrarInfoJugador(*jugadorActual);
+					gestorPantalla.mostrarInfoJugador(*Dealer, true);
 				}
 				else {
 					continuar = false;
@@ -116,6 +136,7 @@ void juego::pantallaJuego() {
 
 
 				break;
+			}
 			default:
 				break;
 			}
@@ -128,15 +149,56 @@ void juego::pantallaJuego() {
 
 	//verificamos si se deseaba salir, o simplemente es el turno del dealer
 	if (continuar) {
-
-
-
-
-
+		
+		pantallaFinDelJuego();
+	
 	}
 
 }
+void juego::pantallaFinDelJuego() {
 
+	jugadorGenerico *Dealer = &listaJugadores->obtenerJugador(0);
+	jugadorGenerico *jugadorActual;
+
+	Dealer->getMano()->getCarta(1).voltear();
+
+
+
+	while (Dealer->getPuntuacion() <= 16) {
+		Dealer->pedirCarta(mazoCartas);
+	}
+
+	bool empate = false;
+
+	int puntuacionGanador = listaJugadores->obtenerJugador(0).getPuntuacion();
+	int puntuacionJugadorActual = 0;
+	int posicionGanador = 0;
+	for (int posicion = 1; posicion <= jugadores; posicion++) {
+		puntuacionJugadorActual = listaJugadores->obtenerJugador(posicion).getPuntuacion();
+
+		if (puntuacionGanador == puntuacionJugadorActual) {
+			puntuacionGanador = puntuacionJugadorActual;
+			posicionGanador = posicion;
+			empate = true;
+		}
+		else if (puntuacionGanador > 21 && puntuacionJugadorActual < puntuacionGanador) {
+				empate = false;
+				puntuacionGanador = puntuacionJugadorActual;
+				posicionGanador = posicion;
+		}
+		else if (puntuacionJugadorActual > puntuacionGanador && puntuacionJugadorActual <= 21) {
+				empate = false;
+				puntuacionGanador = puntuacionJugadorActual;
+				posicionGanador = posicion;	
+		}
+	}
+
+
+	gestorPantalla.mostrarFinDelJuego(*listaJugadores, posicionGanador, empate);
+
+
+	_getch();
+}
 
 void juego::jugar() {
 
@@ -148,6 +210,11 @@ void juego::jugar() {
 
 			//nueva partida
 		case 0:{
+
+			jugadores = gestorPantalla.dialogoCantidadJugadores();
+			if (jugadores==0) {
+				break;
+			}
 
 			//inicializaremos todos los datos y luego llamamos a la pantalla del juego
 
@@ -170,17 +237,12 @@ void juego::jugar() {
 			//insertamos siempre al dealer de primero 
 			listaJugadores->insertarFin(*(new dealer()));
 
-
-			listaJugadores->insertarFin(*(new jugador("The only one")));
-
 			for (int i = 0; i < jugadores; i++) {
 
 				stringstream s;
 				s << "Persival#" << i;
 				listaJugadores->insertarFin(*(new jugador(s.str())));
 			}
-
-
 
 
 
