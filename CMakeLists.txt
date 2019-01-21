@@ -30,6 +30,8 @@ set(src2
     source/dealer.cpp
 	source/gestorArchivo.cpp
 	source/gestorConsola.cpp
+	source/gestorGraficos.cpp
+	source/gestorMarcadores.cpp
 	source/juego.cpp
     source/jugador.cpp
     source/jugadorGenerico.cpp
