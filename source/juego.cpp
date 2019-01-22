@@ -274,6 +274,24 @@ void juego::jugar() {
 	return;
 }
 
+
+listaJugador& juego::getJugadores() {
+	return *this->listaJugadores;
+}
+mazo& juego::getMazoCartas() {
+	return *this->mazoCartas;
+}
+
+
+void juego::setTurnoJugador(int turno) {
+	this->turnoJugador = (turno < 0) || (turno > listaJugadores->insertados()) ? 0 : turno;
+}
+
+int juego::getTurnoJugador() {
+	return turnoJugador;
+}
+
+
 juego::~juego(){
 	if (mazoCartas!=nullptr) {
 		delete mazoCartas;

@@ -17,10 +17,12 @@ class juego {
 private:
 	listaJugador* listaJugadores;
 	mazo* mazoCartas;
-	gestorGraficos gestorPantalla;
+	gestorGraficos gestorPantalla;	//el gestor de graficos se no se deberia exponer
 
-	int jugadores = 6;
+	int jugadores = 0;
 	int turnoJugador = 1;
+
+	//variables del gestor de la pantalla
 	int pagina = 0;
 	int paginaDealer = 0;
 	int paginaJugadores = 0;
@@ -31,6 +33,16 @@ private:
 public:
 	juego();
 	void jugar();
+
+
+	//algunos getters en ese caso expondran los datos internos nescesarios para modificar una partida y por lo tanto guardarla y cargarla
+	listaJugador& getJugadores();
+	mazo& getMazoCartas();
+	
+	//void setJugadores();				//este metodo no es nescesario puesto que al cargar partida se registraran los usuarios insertados
+	void setTurnoJugador(int turno);	// es nescesario un get, si se corrompe el archivo de la partida el turno sera del primer jugador
+	int getTurnoJugador();
+
 
 	~juego();
 };
