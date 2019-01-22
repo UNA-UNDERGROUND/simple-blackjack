@@ -551,7 +551,7 @@ void gestorGraficos::mostrarMano(mano &manoJugador, int pagina, bool esDealer) {
 
 }
 
-void gestorGraficos::mostrarJugadoresSecundarios(listaJugador& jugadores, int pagina, int jugadorActual) {
+void gestorGraficos::mostrarJugadoresSecundarios(listaJugador& jugadores, int pagina) {
 
 	int insertados = 0;
 	int posicion = (pagina * 2);
@@ -571,7 +571,7 @@ void gestorGraficos::mostrarJugadoresSecundarios(listaJugador& jugadores, int pa
 	}
 
 	while (insertados < 2 && posicion != fin) {
-		if (posicion != 0 && posicion != jugadorActual) {
+		if (posicion != 0) {
 			mostrarJugadorSecundario(s2ws(jugadores.obtenerJugador(posicion).getNickname()), jugadores, posicion, ++insertados);
 		}
 		posicion++;

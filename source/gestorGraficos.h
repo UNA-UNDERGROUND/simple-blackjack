@@ -40,7 +40,7 @@ public:
 	void mostrarMesa();
 	void mostrarMano(mano &manoJugador, int pagina = 0, bool esDealer = false);
 	void mostrarInfoJugador(jugadorGenerico& jugadorActual, bool esDealer = false);
-	void mostrarJugadoresSecundarios(listaJugador& jugadores, int pagina,int actual);
+	void mostrarJugadoresSecundarios(listaJugador& jugadores, int pagina);
 	void mostrarFinDelJuego(listaJugador& jugadores, int posicionGanador, bool empate);
 	bool dialogoSalida();
 	bool dialogoSalto();

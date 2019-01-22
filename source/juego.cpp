@@ -42,7 +42,7 @@ void juego::pantallaJuego() {
 		gestorPantalla.mostrarMesa();
 		gestorPantalla.mostrarInfoJugador(*jugadorActual);
 		gestorPantalla.mostrarInfoJugador(*Dealer, true);
-		gestorPantalla.mostrarJugadoresSecundarios(*listaJugadores, paginaJugadores, turnoActual);
+		gestorPantalla.mostrarJugadoresSecundarios(*listaJugadores, paginaJugadores);
 
 		boton botonEleccion = boton::Desconocido;
 		do {
@@ -67,7 +67,7 @@ void juego::pantallaJuego() {
 			case Arriba:{
 				if (paginaJugadores != 0 && jugadores > 3) {
 					paginaJugadores--;
-					gestorPantalla.mostrarJugadoresSecundarios(*listaJugadores, paginaJugadores, turnoActual);
+					gestorPantalla.mostrarJugadoresSecundarios(*listaJugadores, paginaJugadores);
 				}
 				break;
 			}
@@ -75,7 +75,7 @@ void juego::pantallaJuego() {
 				//se le restan 1 ya que el dealer y el jugador actual no cuentan 
 				if (paginaJugadores != (jugadores) / 2 && jugadores > 3) {
 					paginaJugadores++;
-					gestorPantalla.mostrarJugadoresSecundarios(*listaJugadores, paginaJugadores, turnoActual);
+					gestorPantalla.mostrarJugadoresSecundarios(*listaJugadores, paginaJugadores);
 				}
 				break;
 			}

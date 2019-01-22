@@ -76,7 +76,7 @@ int mano::getPuntos() {
 			}
 			else {
 				while (ases > 0) {
-					puntaje += (restante > 11 + (ases - 1)) ? 11 : 1;
+					puntaje += (restante >= 11 + (ases - 1)) ? 11 : 1;
 					ases--;
 				}
 			}
