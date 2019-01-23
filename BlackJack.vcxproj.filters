@@ -40,6 +40,16 @@
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\carta.cpp">
       <Filter>clases</Filter>
     </ClCompile>
+    <ClCompile Include="source\gestorConsola.cpp">
+      <Filter>clases</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gestorGraficos.cpp">
+      <Filter>clases</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gestorMarcadores.cpp">
+      <Filter>clases</Filter>
+    </ClCompile>
+    <ClCompile Include="source\utiles.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
@@ -90,6 +100,12 @@
       <Filter>clases</Filter>
     </ClInclude>
     <ClInclude Include="source\utiles.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gestorGraficos.h">
+      <Filter>clases</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gestorMarcadores.h">
       <Filter>clases</Filter>
     </ClInclude>
   </ItemGroup>

@@ -294,12 +294,18 @@
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\nodoCarta.cpp" />
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\nodoJugador.cpp" />
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\source.cpp" />
+    <ClCompile Include="source\gestorConsola.cpp" />
+    <ClCompile Include="source\gestorGraficos.cpp" />
+    <ClCompile Include="source\gestorMarcadores.cpp" />
+    <ClCompile Include="source\utiles.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\carta.h" />
     <ClInclude Include="source\dealer.h" />
     <ClInclude Include="source\gestorArchivo.h" />
     <ClInclude Include="source\gestorConsola.h" />
+    <ClInclude Include="source\gestorGraficos.h" />
+    <ClInclude Include="source\gestorMarcadores.h" />
     <ClInclude Include="source\juego.h" />
     <ClInclude Include="source\jugador.h" />
     <ClInclude Include="source\jugadorGenerico.h" />
