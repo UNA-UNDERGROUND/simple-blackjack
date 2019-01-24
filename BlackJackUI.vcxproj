@@ -286,6 +286,12 @@
     <ClCompile />
     <ClCompile />
     <ClCompile />
+    <ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile />
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\carta.cpp" />

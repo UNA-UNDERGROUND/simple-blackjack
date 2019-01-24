@@ -14,10 +14,6 @@ int main(int argc, char const *argv[]) {
 
 	juego().jugar();
 
-
-
-	system("cls");
-
 	return 0;
 }
 

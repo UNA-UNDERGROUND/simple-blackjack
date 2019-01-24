@@ -19,8 +19,8 @@ private:
 	mazo* mazoCartas;
 	gestorGraficos gestorPantalla;	//el gestor de graficos se no se deberia exponer
 
-	int jugadores = 0;
-	int turnoJugador = 1;
+	int jugadores;
+	int turnoJugador;
 
 	//variables del gestor de la pantalla
 	int pagina = 0;

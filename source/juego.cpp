@@ -4,9 +4,13 @@
 juego::juego(){
 	mazoCartas = nullptr;
 	listaJugadores = nullptr;
+	turnoJugador = 1;
+	jugadores = 0;
 }
 
 void juego::pantallaJuego() {
+
+	gestorPantalla.limpiarPantalla();
 
 	bool continuar = true;						//nos permite saber si queremos saltar el turno o salir del juego
 
@@ -36,7 +40,7 @@ void juego::pantallaJuego() {
 
 	//el dealer es el primero en la lista, por lo tanto se inicia desde el turno de los datos guardados (#1 si es un juego nuevo)
 	for (int turnoActual = turnoJugador; (turnoActual <= jugadores) && (continuar); turnoActual++) {
-
+		turnoJugador = turnoActual;								//actualizamos el turno actual en caso de que desee reanudarse posteriormente
 		jugadorActual = &listaJugadores->obtenerJugador(turnoActual);
 
 		gestorPantalla.mostrarMesa();
@@ -65,15 +69,14 @@ void juego::pantallaJuego() {
 				break;
 			}
 			case Arriba:{
-				if (paginaJugadores != 0 && jugadores > 3) {
+				if (paginaJugadores != 0 && jugadores > 2) {
 					paginaJugadores--;
 					gestorPantalla.mostrarJugadoresSecundarios(*listaJugadores, paginaJugadores);
 				}
 				break;
 			}
-			case Abajo:{
-				//se le restan 1 ya que el dealer y el jugador actual no cuentan 
-				if (paginaJugadores != (jugadores) / 2 && jugadores > 3) {
+			case Abajo:{ 
+				if (paginaJugadores != (jugadores) / 2 && jugadores > 2) {
 					paginaJugadores++;
 					gestorPantalla.mostrarJugadoresSecundarios(*listaJugadores, paginaJugadores);
 				}
@@ -96,13 +99,11 @@ void juego::pantallaJuego() {
 			case Boton3: { // Z - pedir carta
 			
 				jugadorActual->pedirCarta(mazoCartas);
+				gestorPantalla.mostrarInfoJugador(*jugadorActual);
+				gestorPantalla.mostrarMano(*jugadorActual->getMano(), pagina);
 				if (jugadorActual->getPuntuacion() >= 21) {
 					botonEleccion = boton::Atras; // cambiar de turno
-					
-				}
-				else {
-					gestorPantalla.mostrarInfoJugador(*jugadorActual);
-					gestorPantalla.mostrarMano(*jugadorActual->getMano(), pagina);
+					gestorPantalla.dialogoPasado();
 				}
 
 
@@ -197,7 +198,7 @@ void juego::pantallaFinDelJuego() {
 	gestorPantalla.mostrarFinDelJuego(*listaJugadores, posicionGanador, empate);
 
 
-	_getch();
+
 }
 
 void juego::jugar() {
@@ -260,7 +261,15 @@ void juego::jugar() {
 
 			break;
 		}
+		//resumir partida
+		case 1: {
+			//si estan inicializados significa que ya existe una partida, ademas los datos como turno ya estan en la memoria de la clase
+			if ((mazoCartas != nullptr) && (listaJugadores != nullptr)) {
+				pantallaJuego();
+			}
 
+
+		}
 		
 
 		default:
