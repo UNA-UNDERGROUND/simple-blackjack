@@ -65,3 +65,8 @@ wstring s2ws(string ref) {
 	std::wstring resultado = converter.from_bytes(ref);
 	return resultado;
 }
+string ws2s(wstring ref) {
+	//std::wstring_convert<std::codecvt_utf8<char>> converter;
+	std::string resultado;// = converter.from_bytes(ref);
+	return resultado;
+}

@@ -31,8 +31,6 @@ private:
 	void pantallaFinDelJuego();
 
 
-	//fstream archivoMarcador;
-
 public:
 	juego();
 	void jugar();

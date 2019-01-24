@@ -95,4 +95,5 @@ boton capturarEntrada();
 
 
 wstring s2ws(string ref);
+string ws2s(wstring ref);
 

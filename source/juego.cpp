@@ -8,8 +8,6 @@ juego::juego(){
 	jugadores = 0;
 
 
-	
-
 }
 
 void juego::pantallaJuego() {
@@ -22,7 +20,7 @@ void juego::pantallaJuego() {
 	jugadorGenerico* Dealer;
 
 
-	Dealer = &listaJugadores->obtenerJugador(0);
+	Dealer = listaJugadores->obtenerJugador(0);
 
 	//primera capa de la interfaz grafica
 	gestorPantalla.mostrarMesa();
@@ -33,7 +31,7 @@ void juego::pantallaJuego() {
 
 
 	//mostramos los ultimos datos del turno (turno #1 si es una partida nueva)
-	jugadorActual = &listaJugadores->obtenerJugador(turnoJugador);
+	jugadorActual = listaJugadores->obtenerJugador(turnoJugador);
 
 	gestorPantalla.mostrarInfoJugador(*jugadorActual);
 	gestorPantalla.mostrarMano(*jugadorActual->getMano(), pagina);
@@ -45,7 +43,7 @@ void juego::pantallaJuego() {
 	//el dealer es el primero en la lista, por lo tanto se inicia desde el turno de los datos guardados (#1 si es un juego nuevo)
 	for (int turnoActual = turnoJugador; (turnoActual <= jugadores) && (continuar); turnoActual++) {
 		turnoJugador = turnoActual;								//actualizamos el turno actual en caso de que desee reanudarse posteriormente
-		jugadorActual = &listaJugadores->obtenerJugador(turnoActual);
+		jugadorActual = listaJugadores->obtenerJugador(turnoActual);
 
 		gestorPantalla.mostrarMesa();
 		gestorPantalla.mostrarInfoJugador(*jugadorActual);
@@ -162,7 +160,7 @@ void juego::pantallaJuego() {
 }
 void juego::pantallaFinDelJuego() {
 
-	jugadorGenerico *Dealer = &listaJugadores->obtenerJugador(0);
+	jugadorGenerico *Dealer = listaJugadores->obtenerJugador(0);
 	jugadorGenerico *jugadorActual;
 
 	Dealer->getMano()->getCarta(1).voltear();
@@ -175,11 +173,11 @@ void juego::pantallaFinDelJuego() {
 
 	bool empate = false;
 
-	int puntuacionGanador = listaJugadores->obtenerJugador(0).getPuntuacion();
+	int puntuacionGanador = listaJugadores->obtenerJugador(0)->getPuntuacion();
 	int puntuacionJugadorActual = 0;
 	int posicionGanador = 0;
 	for (int posicion = 1; posicion <= jugadores; posicion++) {
-		puntuacionJugadorActual = listaJugadores->obtenerJugador(posicion).getPuntuacion();
+		puntuacionJugadorActual = listaJugadores->obtenerJugador(posicion)->getPuntuacion();
 
 		if (puntuacionGanador == puntuacionJugadorActual) {
 			puntuacionGanador = puntuacionJugadorActual;
@@ -253,8 +251,8 @@ void juego::jugar() {
 
 			//le damos 2 cartas a cada jugador, el primer jugador(#0) es el dealer y el oculta su segunda carta
 			for (int i = 0; i <= jugadores; i++) {
-				listaJugadores->obtenerJugador(i).pedirCarta(mazoCartas);
-				listaJugadores->obtenerJugador(i).pedirCarta(mazoCartas);
+				listaJugadores->obtenerJugador(i)->pedirCarta(mazoCartas);
+				listaJugadores->obtenerJugador(i)->pedirCarta(mazoCartas);
 			}
 
 			turnoJugador = 1;//el primer jugador es el #1 ya que el dealer es el #0

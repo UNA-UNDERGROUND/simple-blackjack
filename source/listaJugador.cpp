@@ -84,14 +84,14 @@ void listaJugador::borrar(string nickname) {
 }
 
 
-jugadorGenerico& listaJugador::obtenerJugador(int posicion) {
-	jugador jugadorVacio("");
+jugadorGenerico* listaJugador::obtenerJugador(int posicion) {
+
 
 	if (listaVacia()) {
-		return jugadorVacio;
+		return nullptr;
 	}
 	if (posicion + 1 < 0 || posicion + 1 > insertados()){
-		return jugadorVacio;
+		return nullptr;
 	}
 	nodoJugador * actual = inicio;
 	for (int i = 0; i < posicion; i++) {
@@ -99,8 +99,7 @@ jugadorGenerico& listaJugador::obtenerJugador(int posicion) {
 	}
 
 	//en caso de que exista un error en los nodos podemos verificar si es nulo
-	return actual != nullptr ? *actual->getActual() : jugadorVacio;					//evita que se copie el jugador actual
-
+	return actual != nullptr ? actual->getActual() : nullptr;
 }
 
 

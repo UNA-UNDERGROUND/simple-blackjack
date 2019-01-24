@@ -355,7 +355,7 @@ void gestorGraficos::mostrarJugadorSecundario(wstring nick, listaJugador& jugado
 	limpiarSector(4, posicionY, 60, posicionY + 5);
 	//limpiarSector(4, 6, 60, 18);
 
-	jugadorGenerico *Actual = &jugadores.obtenerJugador(ubicacion);
+	jugadorGenerico *Actual = jugadores.obtenerJugador(ubicacion);
 
 
 	if (Actual->getMano() != nullptr){
@@ -615,7 +615,7 @@ void gestorGraficos::mostrarJugadoresSecundarios(listaJugador& jugadores, int pa
 
 	while (insertados < 2 && posicion != fin) {
 		if (posicion != 0) {
-			mostrarJugadorSecundario(s2ws(jugadores.obtenerJugador(posicion).getNickname()), jugadores, posicion, ++insertados);
+			mostrarJugadorSecundario(s2ws(jugadores.obtenerJugador(posicion)->getNickname()), jugadores, posicion, ++insertados);
 		}
 		posicion++;
 	}
@@ -785,7 +785,7 @@ void gestorGraficos::mostrarFinDelJuego(listaJugador& jugadores, int posicionGan
 	jugadorGenerico *jugadorActual;
 	for (int i = 0; i < cantidadJugadores; i++) {
 		consolaSalida.gotoXY(2, 2 + i);
-		jugadorActual = &jugadores.obtenerJugador(i);
+		jugadorActual = jugadores.obtenerJugador(i);
 		wcout << s2ws(jugadorActual->getNickname()) << ", puntuación: " << jugadorActual->getPuntuacion();
 	}
 	consolaSalida.gotoXY(40, 2);
@@ -804,7 +804,7 @@ void gestorGraficos::mostrarFinDelJuego(listaJugador& jugadores, int posicionGan
 
 	}
 	consolaSalida.gotoXY(40, 3);
-	wcout << "con una puntuacion de: " << jugadores.obtenerJugador(posicionGanador).getPuntuacion();
+	wcout << "con una puntuacion de: " << jugadores.obtenerJugador(posicionGanador)->getPuntuacion();
 	
 
 
@@ -822,7 +822,7 @@ void gestorGraficos::mostrarFinDelJuego(listaJugador& jugadores, int posicionGan
 	int pagina = 0;
 	boton botonEleccion = boton::Desconocido;
 
-	mostrarMano(*jugadores.obtenerJugador(0).getMano(), pagina, true);
+	mostrarMano(*jugadores.obtenerJugador(0)->getMano(), pagina, true);
 
 	do {
 
@@ -833,14 +833,14 @@ void gestorGraficos::mostrarFinDelJuego(listaJugador& jugadores, int posicionGan
 		case Boton1:{	// Q
 			if (pagina!= 0) {
 				pagina--;
-				mostrarMano(*jugadores.obtenerJugador(0).getMano(), pagina, true);
+				mostrarMano(*jugadores.obtenerJugador(0)->getMano(), pagina, true);
 			}
 			break;
 		}
 		case Boton2:{	// E
-			if (pagina != jugadores.obtenerJugador(0).getMano()->getCartas() / 2) {
+			if (pagina != jugadores.obtenerJugador(0)->getMano()->getCartas() / 2) {
 				pagina++;
-				mostrarMano(*jugadores.obtenerJugador(0).getMano(), pagina, true);
+				mostrarMano(*jugadores.obtenerJugador(0)->getMano(), pagina, true);
 			}
 			break;
 		}
@@ -908,6 +908,64 @@ bool gestorGraficos::animacionLogo(int& eleccion,int limite) {
 }
 
 
+void gestorGraficos::mostrarMarcadores() {
+
+	std::fstream archivoMarcador("marcadores.txt");
+
+
+}
+
+bool gestorGraficos::guardarMarcador(listaJugador& jugadores) {
+	//creamos el archivo
+	std::ofstream("marcadores.txt", std::fstream::app);
+	//no tenemos que cerrarlo puesto que el se cierra solo al dejar de ser usado
+	//sin embargo cuando escribamos en el es recomendable guardar inmediatamente  
+	//ya que usualmente se realizan hasta que dejemos de usarlo
+	//esto se puede hacer cerrandolo manualmente o usando std::flush
+
+	//abrimos el archivo en entrada,salida y agregamos los contenidos, puesto que queremos agregar, no sobreescribir 
+	std::fstream archivoMarcador("marcadores.txt", std::fstream::in | std::fstream::out | std::fstream::app);
+
+	if (!archivoMarcador.is_open()) {
+		archivoMarcador.close();
+		return false;
+	}
+
+	jugadorGenerico* jugadorActual;
+	int jugadoresActuales = jugadores.insertados();
+
+	archivoMarcador << "---------------------------------------------------" << std::endl;
+	archivoMarcador << "jugadores : " << jugadores.insertados() << std::endl;
+
+
+	for (int i = 0; i < jugadoresActuales; i++) {
+		archivoMarcador << "---------------------------------------------------" << std::endl;
+		jugadorActual = jugadores.obtenerJugador(i);
+		archivoMarcador << "nickname:   " << jugadorActual->getNickname() << std::endl;
+		archivoMarcador << "puntuacion: " << jugadorActual->getPuntuacion() << std::endl;
+		archivoMarcador << "cartas del jugador" << std::endl;
+		archivoMarcador << "---------------------------------------------------" << std::endl;
+
+		carta * cartaActual;
+		mano * manoActual=jugadorActual->getMano();
+		int cartas=jugadorActual->getMano()->getPuntos();
+
+		for (int posicionCarta = 0; posicionCarta < cartas; posicionCarta++) {
+			cartaActual = &manoActual->getCarta(i);
+			archivoMarcador << "carta #" << i + 1 << std::endl;
+			archivoMarcador << "numero: " << ws2s(nombreCarta[cartaActual->getcodigo()]) << std::endl;
+			archivoMarcador << "palo :  " << ws2s(nombrePalo[cartaActual->getPalo()]) << std::endl;
+		}
+
+	}
+
+
+	archivoMarcador.close();
+	return true;
+}
+
+
+
 gestorGraficos::~gestorGraficos() {
 
 	//revertimos todo al estado original
@@ -915,13 +973,6 @@ gestorGraficos::~gestorGraficos() {
 	consolaSalida.mostrarCursor();
 
 }
-
-
-
-
-
-
-
 
 
 
