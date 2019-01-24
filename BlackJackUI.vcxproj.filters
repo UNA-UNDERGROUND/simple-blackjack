@@ -49,7 +49,7 @@
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\utiles.cpp">
       <Filter>clases\otros</Filter>
     </ClCompile>
-    <ClCompile Include="source\gestorMarcadores.cpp">
+    <ClCompile Include="source\gestorMarcador.cpp">
       <Filter>clases\gestores\marcadores</Filter>
     </ClCompile>
   </ItemGroup>
@@ -164,7 +164,7 @@
     <ClInclude Include="source\utiles.h">
       <Filter>clases\otros</Filter>
     </ClInclude>
-    <ClInclude Include="source\gestorMarcadores.h">
+    <ClInclude Include="source\gestorMarcador.h">
       <Filter>clases\gestores\marcadores</Filter>
     </ClInclude>
   </ItemGroup>

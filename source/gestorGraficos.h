@@ -1,5 +1,7 @@
 #pragma once
 
+#include <fstream>
+
 #include "gestorConsola.h"
 #include "listaJugador.h"
 #include "dealer.h"
@@ -50,12 +52,10 @@ public:
 	void dialogoPasado();
 	int dialogoCantidadJugadores();
 
+
+	//aparte de los graficos tambien queremos que nuestro gestor de graficos se encargue de guardar y mostrar los marcadores
 	void mostrarMarcadores();
-
-	//funciones aun no implementadas y sin uso
-	bool guardar();
-	bool cargar();
-
+	bool guardarMarcador(listaJugador& jugadores);
 
 
 

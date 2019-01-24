@@ -46,10 +46,10 @@
     <ClCompile Include="source\gestorGraficos.cpp">
       <Filter>clases</Filter>
     </ClCompile>
-    <ClCompile Include="source\gestorMarcadores.cpp">
+    <ClCompile Include="source\utiles.cpp" />
+    <ClCompile Include="source\gestorMarcador.cpp">
       <Filter>clases</Filter>
     </ClCompile>
-    <ClCompile Include="source\utiles.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
@@ -105,7 +105,7 @@
     <ClInclude Include="source\gestorGraficos.h">
       <Filter>clases</Filter>
     </ClInclude>
-    <ClInclude Include="source\gestorMarcadores.h">
+    <ClInclude Include="source\gestorMarcador.h">
       <Filter>clases</Filter>
     </ClInclude>
   </ItemGroup>

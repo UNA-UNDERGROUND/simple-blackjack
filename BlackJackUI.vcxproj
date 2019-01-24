@@ -317,7 +317,7 @@
     <ClCompile Include="source\gestorGraficos.cpp">
       <DebugInformationFormat Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">EditAndContinue</DebugInformationFormat>
     </ClCompile>
-    <ClCompile Include="source\gestorMarcadores.cpp" />
+    <ClCompile Include="source\gestorMarcador.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\carta.h" />
@@ -325,7 +325,7 @@
     <ClInclude Include="source\gestorArchivo.h" />
     <ClInclude Include="source\gestorConsola.h" />
     <ClInclude Include="source\gestorGraficos.h" />
-    <ClInclude Include="source\gestorMarcadores.h" />
+    <ClInclude Include="source\gestorMarcador.h" />
     <ClInclude Include="source\juego.h" />
     <ClInclude Include="source\jugador.h" />
     <ClInclude Include="source\jugadorGenerico.h" />
