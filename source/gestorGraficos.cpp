@@ -442,7 +442,7 @@ int gestorGraficos::menuPrincipal() {
 		if (eleccion == 0) {
 			consolaSalida.cambiarColor(negro, gris);
 		}
-		wcout << "nueva  partida ";
+		wcout << " nueva  partida  ";
 		consolaSalida.cambiarColor(blanco);
 		consolaSalida.gotoXY(55, 19);
 
@@ -450,7 +450,7 @@ int gestorGraficos::menuPrincipal() {
 		if (eleccion == 1) {
 			consolaSalida.cambiarColor(negro, gris);
 		}
-		wcout << "cargar partida ";
+		wcout << "reanudar partida ";
 		consolaSalida.cambiarColor(blanco);
 		consolaSalida.gotoXY(55, 20);
 
@@ -458,7 +458,7 @@ int gestorGraficos::menuPrincipal() {
 		if (eleccion == 2) {
 			consolaSalida.cambiarColor(negro, gris);
 		}
-		wcout << "  Marcadores   ";
+		wcout << "   Marcadores    ";
 		consolaSalida.cambiarColor(blanco);
 
 
@@ -467,7 +467,7 @@ int gestorGraficos::menuPrincipal() {
 		}
 		consolaSalida.gotoXY(55, 21);
 
-		wcout << "     Salir     ";
+		wcout << "      Salir      ";
 		consolaSalida.cambiarColor(blanco);
 
 	} while (!animacionLogo(eleccion, 3));

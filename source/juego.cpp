@@ -122,6 +122,7 @@ void juego::pantallaJuego() {
 				break;
 			}
 			case Boton5:	// C
+				gestorPantalla.guardar();
 				break;
 			case Atras:{
 
