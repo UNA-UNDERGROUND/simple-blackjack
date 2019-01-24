@@ -681,6 +681,7 @@ void gestorGraficos::dialogoPasado() {
 	consolaSalida.gotoXY(15, 28);
 	consolaSalida.cambiarColor(negro, grisOscuro);
 	wcout << "el Jugador se paso de 21 ó llego a 21, presione cualquier tecla para cambiar de turno";
+	consolaSalida.cambiarColor(blanco);
 	_getch();
 
 }

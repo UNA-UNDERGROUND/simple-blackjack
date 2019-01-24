@@ -6,6 +6,10 @@ juego::juego(){
 	listaJugadores = nullptr;
 	turnoJugador = 1;
 	jugadores = 0;
+
+
+	
+
 }
 
 void juego::pantallaJuego() {
