@@ -35,7 +35,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{0BAF9CA4-1505-39ED-8B4B-454A798F18AF}</ProjectGuid>
+    <ProjectGuid>{83B33962-6E9E-37F3-9611-2E61730785BD}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>Win32</Platform>
@@ -45,22 +45,22 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
@@ -68,6 +68,7 @@
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <PlatformToolset>v141</PlatformToolset>
@@ -280,10 +281,23 @@
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Link />
+    <ClCompile />
+    <ClCompile />
+    <ClCompile />
+    <ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile />
+  </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\carta.cpp" />
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\dealer.cpp" />
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\gestorArchivo.cpp" />
+    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\gestorConsola.cpp" />
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\juego.cpp" />
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\jugador.cpp" />
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\jugadorGenerico.cpp" />
@@ -293,11 +307,17 @@
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\mazo.cpp" />
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\nodoCarta.cpp" />
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\nodoJugador.cpp" />
-    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\source.cpp" />
-    <ClCompile Include="source\gestorConsola.cpp" />
-    <ClCompile Include="source\gestorGraficos.cpp" />
+    <ClCompile Include="source\source.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/ZI %(AdditionalOptions)</AdditionalOptions>
+      <DebugInformationFormat Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\utiles.cpp">
+      <DebugInformationFormat Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <ClCompile Include="source\gestorGraficos.cpp">
+      <DebugInformationFormat Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">EditAndContinue</DebugInformationFormat>
+    </ClCompile>
     <ClCompile Include="source\gestorMarcador.cpp" />
-    <ClCompile Include="source\utiles.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\carta.h" />

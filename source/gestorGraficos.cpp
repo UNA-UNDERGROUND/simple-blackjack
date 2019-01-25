@@ -358,7 +358,7 @@ void gestorGraficos::mostrarJugadorSecundario(wstring nick, listaJugador& jugado
 	jugadorGenerico *Actual = jugadores.obtenerJugador(ubicacion);
 
 
-	if (Actual->getMano() != nullptr){
+	if (Actual != nullptr){
 		consolaSalida.gotoXY(4, posicionY++);
 		wcout << "jugador#" << ubicacion;
 		consolaSalida.gotoXY(4, posicionY++);
@@ -501,7 +501,7 @@ void gestorGraficos::mostrarMesa() {
 
 	consolaSalida.gotoXY(0, 28);
 
-	wcout << "		(z)Pedir carta - (x)Pasar - (c)Guardar Partida - (Esc)Salir";
+	wcout << "		(z)Pedir carta - (x)Pasar - (c)Guardar Marcador - (Esc)Salir";
 
 	consolaSalida.cambiarColor(blanco);
 

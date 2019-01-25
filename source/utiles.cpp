@@ -66,7 +66,5 @@ wstring s2ws(string ref) {
 	return resultado;
 }
 string ws2s(wstring ref) {
-
-	//setlocale(LC_CTYPE, "");
 	return std::string (ref.begin(), ref.end());
 }
