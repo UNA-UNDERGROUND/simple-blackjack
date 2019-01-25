@@ -30,7 +30,7 @@ using std::wcout;			//variante estandar de cout
 // limpart pantalla extraido de :					https://support.microsoft.com/en-us/help/99261/how-to-performing-clear-screen-cls-in-a-console-application
 // lectura en segundo plano extraido y badado de:	https://gist.github.com/vmrob/ff20420a20c59b5a98a1
 //													http://www.cplusplus.com/reference/future/future/wait_for/
-		
+// s2ws basado en :									https://stackoverflow.com/questions/4804298/how-to-convert-wstring-into-string
 
 
 

@@ -910,7 +910,28 @@ bool gestorGraficos::animacionLogo(int& eleccion,int limite) {
 
 void gestorGraficos::mostrarMarcadores() {
 
-	std::fstream archivoMarcador("marcadores.txt");
+
+	std::wfstream archivoMarcador("marcadores.txt", std::fstream::in);
+
+	consolaSalida.cambiarColor(blanco);
+
+	consolaSalida.limpiarPantalla();
+
+	
+	if (!archivoMarcador.is_open()) {
+		wcout << "no se pudieron abrir los marcadores" << endl;
+		_getch();
+		return;
+	}
+
+
+	wstring linea;														//algunos caracteres son unicode, así que usaremos wstring,pero se puede usar string si no se usan signos 								
+	while (!archivoMarcador.eof()) {
+		std::getline(archivoMarcador, linea);
+		wcout << linea << endl;
+	}
+	wcout << "fin de los marcadores guardados" << endl;
+	_getch();
 
 
 }
@@ -928,6 +949,13 @@ bool gestorGraficos::guardarMarcador(listaJugador& jugadores) {
 
 	if (!archivoMarcador.is_open()) {
 		archivoMarcador.close();
+
+		consolaSalida.gotoXY(15, 28);
+		consolaSalida.cambiarColor(negro, grisOscuro);
+		wcout << "                      no se pudo guardar el marcador                        ";
+		consolaSalida.cambiarColor(blanco);
+
+		_getch();
 		return false;
 	}
 
@@ -948,19 +976,28 @@ bool gestorGraficos::guardarMarcador(listaJugador& jugadores) {
 
 		carta * cartaActual;
 		mano * manoActual=jugadorActual->getMano();
-		int cartas=jugadorActual->getMano()->getPuntos();
+		int cartas=jugadorActual->getMano()->getCartas();
 
 		for (int posicionCarta = 0; posicionCarta < cartas; posicionCarta++) {
-			cartaActual = &manoActual->getCarta(i);
-			archivoMarcador << "carta #" << i + 1 << std::endl;
-			archivoMarcador << "numero: " << ws2s(nombreCarta[cartaActual->getcodigo()]) << std::endl;
-			archivoMarcador << "palo :  " << ws2s(nombrePalo[cartaActual->getPalo()]) << std::endl;
+			cartaActual = &manoActual->getCarta(posicionCarta);
+			string carta= ws2s(nombreCarta[cartaActual->getcodigo()]) + " de " + ws2s(nombrePalo[cartaActual->getPalo()]) + ",";
+			archivoMarcador << carta;
 		}
-
+		archivoMarcador << endl;
+		archivoMarcador << "---------------------------------------------------" << std::endl;
 	}
 
 
+
 	archivoMarcador.close();
+
+
+	consolaSalida.gotoXY(15, 28);
+	consolaSalida.cambiarColor(negro, grisOscuro);
+	wcout << "                          marcador guardado exitosamente                ";
+	consolaSalida.cambiarColor(blanco);
+
+	_getch();
 	return true;
 }
 
