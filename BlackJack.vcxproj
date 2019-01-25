@@ -296,7 +296,6 @@
   <ItemGroup>
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\carta.cpp" />
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\dealer.cpp" />
-    <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\gestorArchivo.cpp" />
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\gestorConsola.cpp" />
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\juego.cpp" />
     <ClCompile Include="C:\Users\jongu\source\repos\proyecto-2 blackjack\source\jugador.cpp" />
@@ -317,15 +316,12 @@
     <ClCompile Include="source\gestorGraficos.cpp">
       <DebugInformationFormat Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">EditAndContinue</DebugInformationFormat>
     </ClCompile>
-    <ClCompile Include="source\gestorMarcador.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\carta.h" />
     <ClInclude Include="source\dealer.h" />
-    <ClInclude Include="source\gestorArchivo.h" />
     <ClInclude Include="source\gestorConsola.h" />
     <ClInclude Include="source\gestorGraficos.h" />
-    <ClInclude Include="source\gestorMarcador.h" />
     <ClInclude Include="source\juego.h" />
     <ClInclude Include="source\jugador.h" />
     <ClInclude Include="source\jugadorGenerico.h" />
