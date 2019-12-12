@@ -1,8 +1,17 @@
 #include "gestorConsola.h"
 
+#ifndef WIN32
+	struct COORD{
+		int X=0;
+		int Y=0;
+	};
+#endif
+
 
 gestorConsola::gestorConsola() {
+	#ifdef WIN32
 	salidaConsola = GetStdHandle(STD_OUTPUT_HANDLE);
+	#endif
 	/*
 	wchar_t *screen = new wchar_t[120 * 30];
 	salidaConsola = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
@@ -17,25 +26,28 @@ void gestorConsola::gotoXY(int x, int y) {
 	COORD coordenadas;
 	coordenadas.X = x;
 	coordenadas.Y = y;
+	#ifdef WIN32
 	SetConsoleCursorPosition(salidaConsola, coordenadas);
+	#endif
 }
 
-
+#ifdef WIN32
 //en esta funcion no ocupamos restaurar los colores a diferiencia de la original,tambien elige por defecto fondo negro
 void gestorConsola::cambiarColor(color texto, color fondo) {
 	SetConsoleTextAttribute(salidaConsola, texto | (fondo << 4));
 }
 
+
 //nos permite mostrar/ocultar el cursor, por defecto lo muestra
 void gestorConsola::mostrarCursor(bool mostrarCursor) {
 
 	CONSOLE_CURSOR_INFO     infoCursor;								//almacena la informacion del cursor
-	GetConsoleCursorInfo(salidaConsola, &infoCursor);				//obtenemos la información del cursor
+	GetConsoleCursorInfo(salidaConsola, &infoCursor);				//obtenemos la informaciï¿½n del cursor
 	infoCursor.bVisible = mostrarCursor;							//cambiamos el estado
 	SetConsoleCursorInfo(salidaConsola, &infoCursor);				//guardamos los cambios
 }
 
-/* Standard error macro for reporting API errors */
+
 
 
 void gestorConsola::limpiarPantalla() {
@@ -82,6 +94,8 @@ void gestorConsola::setConsola(HANDLE consola) {
 HANDLE gestorConsola::getConsola() {
 	return salidaConsola;
 }
+
+#endif
 
 
 

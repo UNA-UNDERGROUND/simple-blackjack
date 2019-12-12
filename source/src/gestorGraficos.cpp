@@ -1004,11 +1004,11 @@ bool gestorGraficos::guardarMarcador(listaJugador& jugadores) {
 
 
 gestorGraficos::~gestorGraficos() {
-
+	#ifdef WIN32
 	//revertimos todo al estado original
 	consolaUnicode(false);						
 	consolaSalida.mostrarCursor();
-
+	#endif
 }
 
 

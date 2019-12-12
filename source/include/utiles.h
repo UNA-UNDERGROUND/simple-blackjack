@@ -1,10 +1,12 @@
 ﻿#pragma once
 
-
-#include <Windows.h>			// la mayoria de estas funciones requieren la libreria de windows,pero tambien se pueder portear a linux o unix de ser necesario
-#include <io.h>					// nos permite cambiar el modo de la consola
+#ifdef WIN32
+	#include <Windows.h>			// la mayoria de estas funciones requieren la libreria de windows,pero tambien se pueder portear a linux o unix de ser necesario
+	#include <io.h>					// nos permite cambiar el modo de la consola
+	#include <conio.h>				// getch
+#endif
 #include <fcntl.h>				// nos permite cambiar a modo unicode
-#include <conio.h>				// getch
+
 #include <iostream>
 #include <chrono>
 #include <future>
@@ -70,6 +72,8 @@ enum boton {
 // 
 // definiciones de colores, notese que estan limitados a 8 colores,pero son 16 por la intentencidad,tambien al ser codigos hexadecimales pueden ser combinados con un o lógico
 // o desplazarlos para cambiar entre fondo y texto,pero notese que son hexadecimales y no binarios por lo tanto deben de ser desplazados 4 bits y no uno
+
+#ifdef WIN32
 enum color {
 	negro			= 0,
 	azulOscuro		= FOREGROUND_BLUE,
@@ -88,12 +92,17 @@ enum color {
 	amarillo		= FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN,
 	blanco			= FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE,
 };
+#else
 
+#endif
+
+#ifdef WIN32
 void consolaUnicode(bool activada = true);
+#endif
 
 boton capturarEntrada();
 
-
+#ifdef WIN32
 wstring s2ws(string ref);
 string ws2s(wstring ref);
-
+#endif
