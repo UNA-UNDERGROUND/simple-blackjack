@@ -102,7 +102,7 @@ void consolaUnicode(bool activada = true);
 
 boton capturarEntrada();
 
-#ifdef WIN32
+
 wstring s2ws(string ref);
 string ws2s(wstring ref);
-#endif
+

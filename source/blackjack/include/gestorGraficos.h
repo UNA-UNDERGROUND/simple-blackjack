@@ -54,7 +54,6 @@ public:
 
 	//aparte de los graficos tambien queremos que nuestro gestor de graficos se encargue de guardar y mostrar los marcadores
 	void mostrarMarcadores();
-	bool guardarMarcador(std::vector<jugadorGenerico*>& jugadores);
 
 
 

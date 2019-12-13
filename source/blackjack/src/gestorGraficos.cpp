@@ -4,15 +4,17 @@
 
 
 gestorGraficos::gestorGraficos() {
-
+	#ifdef WIN32
 	consolaUnicode();						//podremos acceder a mas caracteres,pero no podremos usar std::cout, a cambio se puede usar std::wcout
 	consolaSalida.mostrarCursor(false);
-
+	#endif
 }
 
 
 void gestorGraficos::imprimirCarta(carta& ref, int x, int y,bool vacia) {
+	#ifdef WIN32
 	consolaSalida.cambiarColor(blanco);
+
 
 	//nos dirigimos a la posicion inicial
 	consolaSalida.gotoXY(x, y);
@@ -93,6 +95,7 @@ void gestorGraficos::imprimirCarta(carta& ref, int x, int y,bool vacia) {
 
 
 	consolaSalida.cambiarColor(blanco, negro);
+	#endif
 }
 void gestorGraficos::dibujarRectangulo(int x1, int y1, int x2, int y2,bool rellenar) {
 
@@ -138,7 +141,7 @@ void gestorGraficos::dibujarRectangulo(int x1, int y1, int x2, int y2,bool relle
 }
 
 void gestorGraficos::dibujarLogo(int xLogo, int yLogo) {
-
+	#ifdef WIN32
 	consolaSalida.gotoXY(xLogo, yLogo++);
 
 	//primera linea
@@ -208,10 +211,11 @@ void gestorGraficos::dibujarLogo(int xLogo, int yLogo) {
 	consolaSalida.cambiarColor(blanco);
 	wcout << L"╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝" << endl;
 
-
+	#endif
 
 }
 void gestorGraficos::animarLogo() {
+	#ifdef WIN32
 	consolaSalida.cambiarColor(colorLuz);
 	for (int i = 0; i < 4; i++) {
 		consolaSalida.gotoXY(puntoX[i], puntoY[i]);
@@ -278,6 +282,7 @@ void gestorGraficos::animarLogo() {
 	else {
 		puntosRestantes--;
 	}
+	#endif
 }
 
 void gestorGraficos::limpiarSector(int x1, int y1, int x2, int y2) {
@@ -303,6 +308,7 @@ void gestorGraficos::limpiarPantalla() {
 
 
 void gestorGraficos::mostrarInfoJugador(jugadorGenerico &jugadorActual, bool esDealer){
+	#ifdef WIN32
 	consolaSalida.cambiarColor(negro, grisOscuro);
 
 	if (!esDealer) {
@@ -343,7 +349,7 @@ void gestorGraficos::mostrarInfoJugador(jugadorGenerico &jugadorActual, bool esD
 	
 
 	consolaSalida.cambiarColor(negro);
-
+	#endif
 }
 
 void gestorGraficos::mostrarJugadorSecundario(wstring nick, std::vector<jugadorGenerico*>& jugadores, int ubicacion,int posicion) {
@@ -438,6 +444,7 @@ int gestorGraficos::menuPrincipal() {
 	dibujarLogo(25, 9);
 
 	do {
+		#ifdef WIN32
 		consolaSalida.gotoXY(55, 18);
 		if (eleccion == 0) {
 			consolaSalida.cambiarColor(negro, gris);
@@ -469,13 +476,13 @@ int gestorGraficos::menuPrincipal() {
 
 		wcout << "      Salir      ";
 		consolaSalida.cambiarColor(blanco);
-
+		#endif
 	} while (!animacionLogo(eleccion, 3));
 
 	return eleccion;
 }
 void gestorGraficos::mostrarMesa() {
-
+	#ifdef WIN32
 	consolaSalida.cambiarColor(grisOscuro);
 
 	//primero dibujamos el fondo, asi evitamos que la pantalla se mueva
@@ -504,7 +511,7 @@ void gestorGraficos::mostrarMesa() {
 	wcout << "		(z)Pedir carta - (x)Pasar - (c)Guardar Marcador - (Esc)Salir";
 
 	consolaSalida.cambiarColor(blanco);
-
+	#endif
 
 }
 void gestorGraficos::mostrarMano(mano &manoJugador, int pagina, bool esDealer) {
@@ -595,11 +602,12 @@ void gestorGraficos::mostrarMano(mano &manoJugador, int pagina, bool esDealer) {
 }
 
 void gestorGraficos::mostrarJugadoresSecundarios(std::vector<jugadorGenerico*>& jugadores, int pagina) {
-
+	
 	int insertados = 0;
 	int posicion = (pagina * 2);
 	int fin = jugadores.size();
 
+	#ifdef WIN32
 	consolaSalida.gotoXY(2, 3);
 	consolaSalida.cambiarColor(blanco);
 
@@ -648,11 +656,13 @@ void gestorGraficos::mostrarJugadoresSecundarios(std::vector<jugadorGenerico*>& 
 	if (insertados < 2) {
 		limpiarSector(4, 14, 60, 18);
 	}
+	#endif
 
 }
 
 bool gestorGraficos::dialogoSalida() {
 
+	#ifdef WIN32
 	consolaSalida.gotoXY(15, 28);
 	consolaSalida.cambiarColor(negro, grisOscuro);
 	wcout << "¿ Desea salir del Juego ?		(Q)Si.		(E)No.";
@@ -660,11 +670,11 @@ bool gestorGraficos::dialogoSalida() {
 		wcout << " ";
 	}
 	consolaSalida.cambiarColor(blanco);
-
+	#endif
 	return eleccion();
 }
 bool gestorGraficos::dialogoSalto() {
-
+	#ifdef WIN32
 	consolaSalida.gotoXY(15, 28);
 	consolaSalida.cambiarColor(negro, grisOscuro);
 	wcout << "¿ Desea pasar su turno ?		(Q)Si.		(E)No.";
@@ -672,17 +682,18 @@ bool gestorGraficos::dialogoSalto() {
 		wcout << " ";
 	}
 	consolaSalida.cambiarColor(blanco);
-
+	#endif
 	return eleccion();
 
 }
 void gestorGraficos::dialogoPasado() {
-
+	#ifdef WIN32
 	consolaSalida.gotoXY(15, 28);
 	consolaSalida.cambiarColor(negro, grisOscuro);
 	wcout << "el Jugador se paso de 21 ó llego a 21, presione cualquier tecla para cambiar de turno";
 	consolaSalida.cambiarColor(blanco);
 	_getch();
+	#endif
 
 }
 
@@ -693,7 +704,7 @@ int gestorGraficos::dialogoCantidadJugadores() {
 	int eleccion = 0;
 
 	do {
-
+		#ifdef WIN32
 		int posicionInicial = 18;
 
 		consolaSalida.gotoXY(55, posicionInicial++);
@@ -758,7 +769,7 @@ int gestorGraficos::dialogoCantidadJugadores() {
 		consolaSalida.gotoXY(55, posicionInicial);
 
 		wcout << "7 Jugadores. ";
-
+		#endif
 
 
 
@@ -912,7 +923,7 @@ void gestorGraficos::mostrarMarcadores() {
 
 
 	std::wfstream archivoMarcador("marcadores.txt", std::fstream::in);
-
+	
 	consolaSalida.cambiarColor(blanco);
 
 	consolaSalida.limpiarPantalla();
@@ -936,70 +947,7 @@ void gestorGraficos::mostrarMarcadores() {
 
 }
 
-bool gestorGraficos::guardarMarcador(std::vector<jugadorGenerico*>& jugadores) {
-	//creamos el archivo
-	std::ofstream("marcadores.txt", std::fstream::app);
-	//no tenemos que cerrarlo puesto que el se cierra solo al dejar de ser usado
-	//sin embargo cuando escribamos en el es recomendable guardar inmediatamente  
-	//ya que usualmente se realizan hasta que dejemos de usarlo
-	//esto se puede hacer cerrandolo manualmente o usando std::flush
 
-	//abrimos el archivo en entrada,salida y agregamos los contenidos, puesto que queremos agregar, no sobreescribir 
-	std::fstream archivoMarcador("marcadores.txt", std::fstream::in | std::fstream::out | std::fstream::app);
-
-	if (!archivoMarcador.is_open()) {
-		archivoMarcador.close();
-
-		consolaSalida.gotoXY(15, 28);
-		consolaSalida.cambiarColor(negro, grisOscuro);
-		wcout << "                      no se pudo guardar el marcador                        ";
-		consolaSalida.cambiarColor(blanco);
-
-		_getch();
-		return false;
-	}
-
-	jugadorGenerico* jugadorActual;
-	int jugadoresActuales = jugadores.size();
-
-	archivoMarcador << "---------------------------------------------------" << std::endl;
-	archivoMarcador << "jugadores : " << jugadores.size() << std::endl;
-
-
-	for (int i = 0; i < jugadoresActuales; i++) {
-		archivoMarcador << "---------------------------------------------------" << std::endl;
-		jugadorActual = jugadores[i];
-		archivoMarcador << "nickname:   " << jugadorActual->getNickname() << std::endl;
-		archivoMarcador << "puntuacion: " << jugadorActual->getPuntuacion() << std::endl;
-		archivoMarcador << "cartas del jugador" << std::endl;
-		archivoMarcador << "---------------------------------------------------" << std::endl;
-
-		carta * cartaActual;
-		mano * manoActual=jugadorActual->getMano();
-		int cartas=jugadorActual->getMano()->getCartas();
-
-		for (int posicionCarta = 0; posicionCarta < cartas; posicionCarta++) {
-			cartaActual = &manoActual->getCarta(posicionCarta);
-			string carta= ws2s(nombreCarta[cartaActual->getcodigo()]) + " de " + ws2s(nombrePalo[cartaActual->getPalo()]) + ",";
-			archivoMarcador << carta;
-		}
-		archivoMarcador << endl;
-		archivoMarcador << "---------------------------------------------------" << std::endl;
-	}
-
-
-
-	archivoMarcador.close();
-
-
-	consolaSalida.gotoXY(15, 28);
-	consolaSalida.cambiarColor(negro, grisOscuro);
-	wcout << "                          marcador guardado exitosamente                ";
-	consolaSalida.cambiarColor(blanco);
-
-	_getch();
-	return true;
-}
 
 
 
