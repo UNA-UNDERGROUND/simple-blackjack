@@ -54,7 +54,7 @@ public:
     mazo(mazo &ref);
     void inicializar();
     void barajar();
-    carta *tomarCarta();
+    carta tomarCarta();
 	void insertarCarta(carta ref);
     ~mazo();
 };

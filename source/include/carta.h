@@ -10,15 +10,14 @@ const std::wstring simboloPalo[]{ L"?", L"♠", L"♣", L"♥", L"♦" };
 
 class carta{
 private:
-    int codigo;
-    int palo;
-    bool bocaAbajo;
+    int codigo=0;//0 es nulo
+    int palo=0; //0 es nulo
+    bool bocaAbajo=true;
 
 
 public:
-    carta();
+    carta() = default;
     carta(int codigo,int palo);
-    carta(carta & ref);
     
     void voltear();
 
@@ -28,8 +27,6 @@ public:
     int getPalo();
 	bool revelada();
     
-
-    ~carta();
 };
 
 

@@ -11,7 +11,7 @@ string dealer::getNickname() {
 }
 
 void dealer::pedirCarta(mazo *m) {
-	manoJugador->agregarCarta(m);
+	manoJugador->agregarCarta(*m);
 	//se giraran por defecto las cartas que no sean la segunda
 	if (manoJugador->getCartas() != 2) {
 		manoJugador->getCarta(manoJugador->getCartas() - 1).voltear();

@@ -40,7 +40,7 @@ void mazo::barajar(){
 	std::mt19937 generadorAleatorio(dispositivoAleatorio());
     std::shuffle( Carta, Carta + 52, generadorAleatorio);
 }
-carta* mazo::tomarCarta(){
+carta mazo::tomarCarta(){
 
     
     for(int i = 51; i >= 0; i--){
@@ -49,11 +49,11 @@ carta* mazo::tomarCarta(){
             carta * c = new carta( *Carta[i] );   //creamos una carta nueva a partir de la que encontramos
             delete Carta[i];                      //eliminamos nuestra carta
             Carta[i] = nullptr;                   //asignamos un puntero nulo para su posterior reutilizacion
-            return c;                             //retornamos el puntero de la copia de nuestra carta, nota: importante eliminar la instancia posteriormente
+            return carta(*c);                             //retornamos el puntero de la copia de nuestra carta, nota: importante eliminar la instancia posteriormente
         }
         
     }
-    return nullptr;                               // no hay mas cartas disponibles
+    return carta();                               // no hay mas cartas disponibles
 }
 void mazo::insertarCarta(carta ref) {
 

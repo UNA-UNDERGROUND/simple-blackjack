@@ -346,7 +346,7 @@ void gestorGraficos::mostrarInfoJugador(jugadorGenerico &jugadorActual, bool esD
 
 }
 
-void gestorGraficos::mostrarJugadorSecundario(wstring nick, listaJugador& jugadores, int ubicacion,int posicion) {
+void gestorGraficos::mostrarJugadorSecundario(wstring nick, std::vector<jugadorGenerico*>& jugadores, int ubicacion,int posicion) {
 
 
 	int posicionY = (2 * (posicion + 1)) + 4 * posicion; //ubicacion de la esquina*(posicion deseada)+separacion entre jugadoresSecundarios
@@ -355,7 +355,7 @@ void gestorGraficos::mostrarJugadorSecundario(wstring nick, listaJugador& jugado
 	limpiarSector(4, posicionY, 60, posicionY + 5);
 	//limpiarSector(4, 6, 60, 18);
 
-	jugadorGenerico *Actual = jugadores.obtenerJugador(ubicacion);
+	jugadorGenerico *Actual = jugadores[ubicacion];
 
 
 	if (Actual != nullptr){
@@ -594,11 +594,11 @@ void gestorGraficos::mostrarMano(mano &manoJugador, int pagina, bool esDealer) {
 
 }
 
-void gestorGraficos::mostrarJugadoresSecundarios(listaJugador& jugadores, int pagina) {
+void gestorGraficos::mostrarJugadoresSecundarios(std::vector<jugadorGenerico*>& jugadores, int pagina) {
 
 	int insertados = 0;
 	int posicion = (pagina * 2);
-	int fin = jugadores.insertados();
+	int fin = jugadores.size();
 
 	consolaSalida.gotoXY(2, 3);
 	consolaSalida.cambiarColor(blanco);
@@ -615,7 +615,7 @@ void gestorGraficos::mostrarJugadoresSecundarios(listaJugador& jugadores, int pa
 
 	while (insertados < 2 && posicion != fin) {
 		if (posicion != 0) {
-			mostrarJugadorSecundario(s2ws(jugadores.obtenerJugador(posicion)->getNickname()), jugadores, posicion, ++insertados);
+			mostrarJugadorSecundario(s2ws(jugadores[posicion]->getNickname()), jugadores, posicion, ++insertados);
 		}
 		posicion++;
 	}
@@ -626,7 +626,7 @@ void gestorGraficos::mostrarJugadoresSecundarios(listaJugador& jugadores, int pa
 	}
 
 
-	if (jugadores.insertados() > 3) {
+	if (jugadores.size() > 3) {
 
 		consolaSalida.gotoXY(40, 6);
 		if (pagina != 0) {
@@ -637,7 +637,7 @@ void gestorGraficos::mostrarJugadoresSecundarios(listaJugador& jugadores, int pa
 		}
 
 		consolaSalida.gotoXY(40, 8);
-		if (pagina < jugadores.insertados() / 2 && (jugadores.insertados() / 2 - pagina > 1)) { // la segunda comparacion determina si es una media pagina,(en caso de numeros impares como 3,5 7)
+		if (pagina < jugadores.size() / 2 && (jugadores.size() / 2 - pagina > 1)) { // la segunda comparacion determina si es una media pagina,(en caso de numeros impares como 3,5 7)
 			wcout << L"[ S / ↓ ] Abajo";
 		}
 		else {
@@ -774,18 +774,18 @@ int gestorGraficos::dialogoCantidadJugadores() {
 	return eleccion;
 }
 
-void gestorGraficos::mostrarFinDelJuego(listaJugador& jugadores, int posicionGanador, bool empate) {
+void gestorGraficos::mostrarFinDelJuego(std::vector<jugadorGenerico*>& jugadores, int posicionGanador, bool empate) {
 
 
 	consolaSalida.limpiarPantalla();
 
 
-	int cantidadJugadores = jugadores.insertados();
+	int cantidadJugadores = jugadores.size();
 
 	jugadorGenerico *jugadorActual;
 	for (int i = 0; i < cantidadJugadores; i++) {
 		consolaSalida.gotoXY(2, 2 + i);
-		jugadorActual = jugadores.obtenerJugador(i);
+		jugadorActual = jugadores[i];
 		wcout << s2ws(jugadorActual->getNickname()) << ", puntuación: " << jugadorActual->getPuntuacion();
 	}
 	consolaSalida.gotoXY(40, 2);
@@ -804,7 +804,7 @@ void gestorGraficos::mostrarFinDelJuego(listaJugador& jugadores, int posicionGan
 
 	}
 	consolaSalida.gotoXY(40, 3);
-	wcout << "con una puntuacion de: " << jugadores.obtenerJugador(posicionGanador)->getPuntuacion();
+	wcout << "con una puntuacion de: " << jugadores[posicionGanador]->getPuntuacion();
 	
 
 
@@ -822,7 +822,7 @@ void gestorGraficos::mostrarFinDelJuego(listaJugador& jugadores, int posicionGan
 	int pagina = 0;
 	boton botonEleccion = boton::Desconocido;
 
-	mostrarMano(*jugadores.obtenerJugador(0)->getMano(), pagina, true);
+	mostrarMano(*jugadores[0]->getMano(), pagina, true);
 
 	do {
 
@@ -833,14 +833,14 @@ void gestorGraficos::mostrarFinDelJuego(listaJugador& jugadores, int posicionGan
 		case Boton1:{	// Q
 			if (pagina!= 0) {
 				pagina--;
-				mostrarMano(*jugadores.obtenerJugador(0)->getMano(), pagina, true);
+				mostrarMano(*jugadores[0]->getMano(), pagina, true);
 			}
 			break;
 		}
 		case Boton2:{	// E
-			if (pagina != jugadores.obtenerJugador(0)->getMano()->getCartas() / 2) {
+			if (pagina != jugadores[0]->getMano()->getCartas() / 2) {
 				pagina++;
-				mostrarMano(*jugadores.obtenerJugador(0)->getMano(), pagina, true);
+				mostrarMano(*jugadores[0]->getMano(), pagina, true);
 			}
 			break;
 		}
@@ -936,7 +936,7 @@ void gestorGraficos::mostrarMarcadores() {
 
 }
 
-bool gestorGraficos::guardarMarcador(listaJugador& jugadores) {
+bool gestorGraficos::guardarMarcador(std::vector<jugadorGenerico*>& jugadores) {
 	//creamos el archivo
 	std::ofstream("marcadores.txt", std::fstream::app);
 	//no tenemos que cerrarlo puesto que el se cierra solo al dejar de ser usado
@@ -960,15 +960,15 @@ bool gestorGraficos::guardarMarcador(listaJugador& jugadores) {
 	}
 
 	jugadorGenerico* jugadorActual;
-	int jugadoresActuales = jugadores.insertados();
+	int jugadoresActuales = jugadores.size();
 
 	archivoMarcador << "---------------------------------------------------" << std::endl;
-	archivoMarcador << "jugadores : " << jugadores.insertados() << std::endl;
+	archivoMarcador << "jugadores : " << jugadores.size() << std::endl;
 
 
 	for (int i = 0; i < jugadoresActuales; i++) {
 		archivoMarcador << "---------------------------------------------------" << std::endl;
-		jugadorActual = jugadores.obtenerJugador(i);
+		jugadorActual = jugadores[i];
 		archivoMarcador << "nickname:   " << jugadorActual->getNickname() << std::endl;
 		archivoMarcador << "puntuacion: " << jugadorActual->getPuntuacion() << std::endl;
 		archivoMarcador << "cartas del jugador" << std::endl;

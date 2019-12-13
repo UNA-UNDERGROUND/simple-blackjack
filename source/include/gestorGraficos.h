@@ -3,7 +3,6 @@
 #include <fstream>
 
 #include "gestorConsola.h"
-#include "listaJugador.h"
 #include "dealer.h"
 
 
@@ -32,7 +31,7 @@ private:
 	void animarLogo();																													//mueve una imagen la animacion del logo
 	void limpiarSector(int x1, int y1, int x2, int y2);
 
-	void mostrarJugadorSecundario(wstring nick, listaJugador& jugadores, int ubicacion, int posicion);
+	void mostrarJugadorSecundario(wstring nick, std::vector<jugadorGenerico*>& jugadores, int ubicacion, int posicion);
 	bool eleccion();		
 	bool animacionLogo(int& eleccion,int limite);																						//nos permite animar el logo y tambien obtener un resultado cuando este listo//para reutilizar el codigo de eleccion si/no
 
@@ -45,8 +44,8 @@ public:
 	void mostrarMesa();
 	void mostrarMano(mano &manoJugador, int pagina = 0, bool esDealer = false);
 	void mostrarInfoJugador(jugadorGenerico& jugadorActual, bool esDealer = false);
-	void mostrarJugadoresSecundarios(listaJugador& jugadores, int pagina);
-	void mostrarFinDelJuego(listaJugador& jugadores, int posicionGanador, bool empate);
+	void mostrarJugadoresSecundarios(std::vector<jugadorGenerico*>& jugadores, int pagina);
+	void mostrarFinDelJuego(std::vector<jugadorGenerico*>& jugadores, int posicionGanador, bool empate);
 	bool dialogoSalida();
 	bool dialogoSalto();
 	void dialogoPasado();
@@ -55,7 +54,7 @@ public:
 
 	//aparte de los graficos tambien queremos que nuestro gestor de graficos se encargue de guardar y mostrar los marcadores
 	void mostrarMarcadores();
-	bool guardarMarcador(listaJugador& jugadores);
+	bool guardarMarcador(std::vector<jugadorGenerico*>& jugadores);
 
 
 

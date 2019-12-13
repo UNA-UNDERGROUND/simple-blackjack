@@ -1,6 +1,6 @@
 #pragma once
 #include "mazo.h"
-#include "listaCarta.h"
+#include <vector>
 
 
 // debido a que se desconoce la cantidad inicial de jugadores se desconoce cuantas cartas se pueden tomar antes del 21
@@ -13,24 +13,18 @@ class mano {
 
 private:
 
-	listaCarta *cartas; 
+	std::vector<carta> cartas; 
 
 public:
 
-	mano();
-	mano(mano &ref);
 
-	void agregarCarta(mazo* ref);
-	void agregarCarta(carta ref);			//indispensable para cargar cartas
+
+	void agregarCarta(mazo& ref);
+	void agregarCarta(carta& ref);			//indispensable para cargar cartas
 	void limpiar();
-	int getCartas();
+	size_t getCartas();
 	carta &getCarta(int posicion);			// es importante que sea una referencia,asi podemos girar la carta
 	int getPuntos();
-
-
-
-
-	~mano();
 
 
 };

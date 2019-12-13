@@ -3,7 +3,6 @@
 
 juego::juego(){
 	mazoCartas = nullptr;
-	listaJugadores = nullptr;
 	turnoJugador = 1;
 	jugadores = 0;
 
@@ -17,21 +16,18 @@ void juego::pantallaJuego() {
 	bool continuar = true;						//nos permite saber si queremos saltar el turno o salir del juego
 
 	jugadorGenerico* jugadorActual;				//puntero hacia el jugador que posee el turno actual
-	jugadorGenerico* Dealer;
-
-
-	Dealer = listaJugadores->obtenerJugador(0);
+	jugadorGenerico& Dealer = *listaJugadores[0];
 
 	//primera capa de la interfaz grafica
 	gestorPantalla.mostrarMesa();
 
 	//mostramos la mano del dealer
-	gestorPantalla.mostrarMano(*Dealer->getMano(), paginaDealer, true);
-	gestorPantalla.mostrarInfoJugador(*Dealer, true);
+	gestorPantalla.mostrarMano(*Dealer.getMano(), paginaDealer, true);
+	gestorPantalla.mostrarInfoJugador(Dealer, true);
 
 
 	//mostramos los ultimos datos del turno (turno #1 si es una partida nueva)
-	jugadorActual = listaJugadores->obtenerJugador(turnoJugador);
+	jugadorActual = listaJugadores[turnoJugador];
 
 	gestorPantalla.mostrarInfoJugador(*jugadorActual);
 	gestorPantalla.mostrarMano(*jugadorActual->getMano(), pagina);
@@ -43,12 +39,12 @@ void juego::pantallaJuego() {
 	//el dealer es el primero en la lista, por lo tanto se inicia desde el turno de los datos guardados (#1 si es un juego nuevo)
 	for (int turnoActual = turnoJugador; (turnoActual <= jugadores) && (continuar); turnoActual++) {
 		turnoJugador = turnoActual;								//actualizamos el turno actual en caso de que desee reanudarse posteriormente
-		jugadorActual = listaJugadores->obtenerJugador(turnoActual);
+		jugadorActual = listaJugadores[turnoActual];
 
 		gestorPantalla.mostrarMesa();
 		gestorPantalla.mostrarInfoJugador(*jugadorActual);
-		gestorPantalla.mostrarInfoJugador(*Dealer, true);
-		gestorPantalla.mostrarJugadoresSecundarios(*listaJugadores, paginaJugadores);
+		gestorPantalla.mostrarInfoJugador(Dealer, true);
+		gestorPantalla.mostrarJugadoresSecundarios(listaJugadores, paginaJugadores);
 
 		boton botonEleccion = boton::Desconocido;
 		do {
@@ -73,28 +69,28 @@ void juego::pantallaJuego() {
 			case Arriba:{
 				if (paginaJugadores != 0 && jugadores > 2) {
 					paginaJugadores--;
-					gestorPantalla.mostrarJugadoresSecundarios(*listaJugadores, paginaJugadores);
+					gestorPantalla.mostrarJugadoresSecundarios(listaJugadores, paginaJugadores);
 				}
 				break;
 			}
 			case Abajo:{ 
 				if (paginaJugadores != (jugadores) / 2 && jugadores > 2) {
 					paginaJugadores++;
-					gestorPantalla.mostrarJugadoresSecundarios(*listaJugadores, paginaJugadores);
+					gestorPantalla.mostrarJugadoresSecundarios(listaJugadores, paginaJugadores);
 				}
 				break;
 			}
 			case Boton1: {	// Q
 				if (paginaDealer != 0) {
 					paginaDealer--;
-					gestorPantalla.mostrarInfoJugador(*Dealer, true);
+					gestorPantalla.mostrarInfoJugador(Dealer, true);
 				}
 				break;
 			}
 			case Boton2: {	// E
 				if (paginaDealer != jugadorActual->getMano()->getCartas() / 4) {
 					paginaDealer++;
-					gestorPantalla.mostrarInfoJugador(*Dealer, true);
+					gestorPantalla.mostrarInfoJugador(Dealer, true);
 				}
 				break;
 			}
@@ -124,11 +120,11 @@ void juego::pantallaJuego() {
 				break;
 			}
 			case Boton5:{	// C
-				gestorPantalla.guardarMarcador(*listaJugadores);
+				gestorPantalla.guardarMarcador(listaJugadores);
 
 				gestorPantalla.mostrarMesa();
 				gestorPantalla.mostrarInfoJugador(*jugadorActual);
-				gestorPantalla.mostrarInfoJugador(*Dealer, true);
+				gestorPantalla.mostrarInfoJugador(Dealer, true);
 				break;
 			}
 			case Atras:{
@@ -137,7 +133,7 @@ void juego::pantallaJuego() {
 					botonEleccion = boton::Desconocido; // esto evitara que salgamos del programa
 					gestorPantalla.mostrarMesa();
 					gestorPantalla.mostrarInfoJugador(*jugadorActual);
-					gestorPantalla.mostrarInfoJugador(*Dealer, true);
+					gestorPantalla.mostrarInfoJugador(Dealer, true);
 				}
 				else {
 					continuar = false;
@@ -166,24 +162,24 @@ void juego::pantallaJuego() {
 }
 void juego::pantallaFinDelJuego() {
 
-	jugadorGenerico *Dealer = listaJugadores->obtenerJugador(0);
+	jugadorGenerico &Dealer = *listaJugadores[0];
 	jugadorGenerico *jugadorActual;
 
-	Dealer->getMano()->getCarta(1).voltear();
+	Dealer.getMano()->getCarta(1).voltear();
 
 
 
-	while (Dealer->getPuntuacion() <= 16) {
-		Dealer->pedirCarta(mazoCartas);
+	while (Dealer.getPuntuacion() <= 16) {
+		Dealer.pedirCarta(mazoCartas);
 	}
 
 	bool empate = false;
 
-	int puntuacionGanador = listaJugadores->obtenerJugador(0)->getPuntuacion();
+	int puntuacionGanador = listaJugadores[0]->getPuntuacion();
 	int puntuacionJugadorActual = 0;
 	int posicionGanador = 0;
 	for (int posicion = 1; posicion <= jugadores; posicion++) {
-		puntuacionJugadorActual = listaJugadores->obtenerJugador(posicion)->getPuntuacion();
+		puntuacionJugadorActual = listaJugadores[posicion]->getPuntuacion();
 
 		if (puntuacionGanador == puntuacionJugadorActual) {
 			puntuacionGanador = puntuacionJugadorActual;
@@ -203,7 +199,7 @@ void juego::pantallaFinDelJuego() {
 	}
 
 
-	gestorPantalla.mostrarFinDelJuego(*listaJugadores, posicionGanador, empate);
+	gestorPantalla.mostrarFinDelJuego(listaJugadores, posicionGanador, empate);
 
 
 
@@ -231,34 +227,34 @@ void juego::jugar() {
 			if (mazoCartas != nullptr) {
 				delete mazoCartas;
 			}
-			if (listaJugadores != nullptr) {
-				delete listaJugadores;
+			if (!listaJugadores.empty() ) {
+				listaJugadores.clear();
 			}
 
 			mazoCartas = new mazo();
-			listaJugadores = new listaJugador();
+			
 
 
 			// agregamos nuevas cartas y las barajamos el mazo
 			mazoCartas->inicializar();
 			mazoCartas->barajar();
 
-			//insertamos siempre al dealer de primero 
-			listaJugadores->insertarFin(*(new dealer()));
+			//insertamos siempre al dealer de primero
+			listaJugadores.push_back(new dealer());
 
 			for (int i = 0; i < jugadores; i++) {
 
 				stringstream s;
-				s << "Persival#" << i;
-				listaJugadores->insertarFin(*(new jugador(s.str())));
+				s << "Jugador#" << i;
+				listaJugadores.push_back(new jugador(s.str()));
 			}
 
 
 
 			//le damos 2 cartas a cada jugador, el primer jugador(#0) es el dealer y el oculta su segunda carta
 			for (int i = 0; i <= jugadores; i++) {
-				listaJugadores->obtenerJugador(i)->pedirCarta(mazoCartas);
-				listaJugadores->obtenerJugador(i)->pedirCarta(mazoCartas);
+				listaJugadores[i]->pedirCarta(mazoCartas);
+				listaJugadores[i]->pedirCarta(mazoCartas);
 			}
 
 			turnoJugador = 1;//el primer jugador es el #1 ya que el dealer es el #0
@@ -272,7 +268,7 @@ void juego::jugar() {
 		//resumir partida
 		case 1: {
 			//si estan inicializados significa que ya existe una partida, ademas los datos como turno ya estan en la memoria de la clase
-			if ((mazoCartas != nullptr) && (listaJugadores != nullptr)) {
+			if ((mazoCartas != nullptr) && (listaJugadores.empty())) {
 				pantallaJuego();
 			}
 
@@ -294,8 +290,8 @@ void juego::jugar() {
 }
 
 
-listaJugador& juego::getJugadores() {
-	return *this->listaJugadores;
+std::vector<jugadorGenerico*>& juego::getJugadores() {
+	return listaJugadores;
 }
 mazo& juego::getMazoCartas() {
 	return *this->mazoCartas;
@@ -303,7 +299,7 @@ mazo& juego::getMazoCartas() {
 
 
 void juego::setTurnoJugador(int turno) {
-	this->turnoJugador = (turno < 0) || (turno > listaJugadores->insertados()) ? 0 : turno;
+	this->turnoJugador = (turno < 0) || (turno > listaJugadores.size()) ? 0 : turno;
 }
 
 int juego::getTurnoJugador() {
@@ -315,8 +311,6 @@ juego::~juego(){
 	if (mazoCartas!=nullptr) {
 		delete mazoCartas;
 	}
-	if (listaJugadores != nullptr) {
-		delete listaJugadores;
-	}
+	system("cls");
 }
 

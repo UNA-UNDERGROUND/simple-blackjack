@@ -13,6 +13,7 @@ int main(int argc, char const *argv[]) {
 
 
 	juego().jugar();
+	
 
 	return 0;
 }

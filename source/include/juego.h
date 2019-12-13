@@ -2,12 +2,13 @@
 
 #include <iostream>
 #include <sstream>
+#include <vector>
+
 
 
 #include "jugador.h"
 #include "dealer.h"
-#include "listaJugador.h"
-#include "listaCarta.h"
+
 
 #include "gestorGraficos.h"
 
@@ -15,9 +16,10 @@ using namespace std;
 
 class juego {
 private:
-	listaJugador* listaJugadores;
+	std::vector<jugadorGenerico*> listaJugadores;
+
 	mazo* mazoCartas;
-	gestorGraficos gestorPantalla;	//el gestor de graficos se no se deberia exponer
+	gestorGraficos gestorPantalla;	//el gestor de graficos se no se deberia e´´´´xponer
 
 	int jugadores;
 	int turnoJugador;
@@ -37,7 +39,7 @@ public:
 
 
 	//algunos getters en ese caso expondran los datos internos nescesarios para modificar una partida y por lo tanto guardarla y cargarla
-	listaJugador& getJugadores();
+	std::vector<jugadorGenerico*>& getJugadores();
 	mazo& getMazoCartas();
 	
 	//void setJugadores();				//este metodo no es nescesario puesto que al cargar partida se registraran los usuarios insertados

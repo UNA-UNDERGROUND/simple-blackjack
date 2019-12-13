@@ -1,50 +1,41 @@
 #include "mano.h"
 
-mano::mano() {
 
-	cartas = new listaCarta();
 
+void mano::agregarCarta(mazo& ref) {
+	agregarCarta(ref.tomarCarta());
 }
-
-mano::mano(mano &ref) {
-	cartas = new listaCarta(*ref.cartas);
-}
-
-void mano::agregarCarta(mazo* ref) {
-	cartas->insertarFin(*ref->tomarCarta());
-}
-void mano::agregarCarta(carta ref) {
-	cartas->insertarFin(ref);
+void mano::agregarCarta(carta& ref) {
+	cartas.push_back(ref);
 }
 void mano::limpiar() {
-
-	if (cartas != nullptr) {
-		delete cartas;
-	}
-	cartas = new listaCarta();
-
+	cartas.clear();
 }
 
 
-int mano::getCartas() {
-	return cartas->listaVacia() ? 0 : cartas->insertados();
+size_t mano::getCartas() {
+	return cartas.size();// cartas->listaVacia() ? 0 : cartas->insertados();
 }
 carta& mano::getCarta(int posicion) {
-	return cartas->obtenerCarta(posicion);
+	if (cartas.size()>posicion)
+	{
+		return cartas[posicion];//->obtenerCarta(posicion);
+	}
+	return carta();
 }
 
 //nota este metodo retorna los puntos de tal manera que sea el resultado que mas le convenga
 int mano::getPuntos() {
 
 
-	if (cartas->listaVacia()){
+	if (cartas.empty()){
 		return 0;
 	}
-	int numeroCartas = cartas->insertados();
+	size_t numeroCartas = getCartas();
 	int puntaje = 0;
 	int ases = 0;
 	for (int i = 0; i < numeroCartas; i++) {
-		carta c(cartas->obtenerCarta(i));
+		carta c(cartas[i]);
 
 		if (c.getcodigo() == 0 || c.getPalo() == 0){
 			//en caso de que la carta tenga un valor invalido
@@ -89,11 +80,3 @@ int mano::getPuntos() {
 
 
 
-mano::~mano() {
-
-	if (cartas != nullptr){
-		delete cartas;
-		cartas = nullptr;
-	}
-	
-}

@@ -15,7 +15,7 @@ string jugador::getNickname() {
 
 
 void jugador::pedirCarta(mazo *m) {
-	manoJugador->agregarCarta(m);
+	manoJugador->agregarCarta(*m);
 	manoJugador->getCarta(manoJugador->getCartas() - 1).voltear();  // las cartas de los jugadores siempre se giran
 }
 

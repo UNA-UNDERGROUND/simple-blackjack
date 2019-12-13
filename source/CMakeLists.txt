@@ -8,12 +8,8 @@ set(src_include
 	include/juego.h
     include/jugador.h
     include/jugadorGenerico.h
-    include/listaCarta.h
-    include/listaJugador.h
     include/mano.h
     include/mazo.h
-    include/nodoCarta.h
-    include/nodoJugador.h
 	include/utiles.h
 )
 set(src  
@@ -24,13 +20,11 @@ set(src
 	src/juego.cpp
     src/jugador.cpp
     src/jugadorGenerico.cpp
-    src/listaCarta.cpp
-    src/listaJugador.cpp
     src/mano.cpp
     src/mazo.cpp
-    src/nodoCarta.cpp
-    src/nodoJugador.cpp
-	src/utiles.cpp
+    src/utiles.cpp
+    
+    src/source.cpp
 )
 
 
