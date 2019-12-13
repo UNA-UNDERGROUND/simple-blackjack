@@ -9,7 +9,7 @@ project (BlackJack CXX)
 set(CMAKE_CXX_STANDARD 14)
 
 
-add_subdirectory ("blackjack")
+add_subdirectory ("source")
 
 
 
