@@ -39,3 +39,10 @@ set(src
 
 add_executable(${PROJECT_NAME} ${src} ${src_include})
 target_include_directories(${PROJECT_NAME} PRIVATE include())
+
+if (UNIX)
+    find_package (Threads)
+    target_link_libraries (${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT})
+
+endif()
+

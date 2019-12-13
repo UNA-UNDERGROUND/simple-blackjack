@@ -93,7 +93,9 @@ enum color {
 	blanco			= FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE,
 };
 #else
-
+enum color{
+	rojo
+};
 #endif
 
 #ifdef WIN32

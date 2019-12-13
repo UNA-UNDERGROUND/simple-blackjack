@@ -47,10 +47,11 @@ void gestorConsola::mostrarCursor(bool mostrarCursor) {
 	SetConsoleCursorInfo(salidaConsola, &infoCursor);				//guardamos los cambios
 }
 
-
+#endif
 
 
 void gestorConsola::limpiarPantalla() {
+	#ifdef WIN32
 	COORD coordScreen = { 0, 0 };    /* here's where we'll home the
 										cursor */
 	BOOL bSuccess;
@@ -86,8 +87,10 @@ void gestorConsola::limpiarPantalla() {
 
 	bSuccess = SetConsoleCursorPosition(salidaConsola, coordScreen);
 	return;
+	#endif
 }
 
+#ifdef WIN32
 void gestorConsola::setConsola(HANDLE consola) {
 	salidaConsola = consola;
 }

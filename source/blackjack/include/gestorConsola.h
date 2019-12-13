@@ -22,7 +22,7 @@ public:
 
 	//nos permite mostrar/ocultar el cursor, por defecto lo muestra
 	void mostrarCursor(bool mostrarCursor = true);
-	void gestorConsola::limpiarPantalla();
+	void limpiarPantalla();
 
 	#ifdef WIN32
 	void setConsola(HANDLE consola);

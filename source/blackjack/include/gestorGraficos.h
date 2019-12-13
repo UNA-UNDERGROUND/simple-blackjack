@@ -51,12 +51,6 @@ public:
 	void dialogoPasado();
 	int dialogoCantidadJugadores();
 
-
-	//aparte de los graficos tambien queremos que nuestro gestor de graficos se encargue de guardar y mostrar los marcadores
-	void mostrarMarcadores();
-
-
-
 	~gestorGraficos();
 
 

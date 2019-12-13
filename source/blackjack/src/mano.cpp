@@ -3,7 +3,8 @@
 
 
 void mano::agregarCarta(mazo& ref) {
-	agregarCarta(ref.tomarCarta());
+	carta c = ref.tomarCarta();
+	agregarCarta(c);
 }
 void mano::agregarCarta(carta& ref) {
 	cartas.push_back(ref);
@@ -21,7 +22,8 @@ carta& mano::getCarta(int posicion) {
 	{
 		return cartas[posicion];//->obtenerCarta(posicion);
 	}
-	return carta();
+	carta c;
+	return c;
 }
 
 //nota este metodo retorna los puntos de tal manera que sea el resultado que mas le convenga

@@ -919,34 +919,6 @@ bool gestorGraficos::animacionLogo(int& eleccion,int limite) {
 }
 
 
-void gestorGraficos::mostrarMarcadores() {
-
-
-	std::wfstream archivoMarcador("marcadores.txt", std::fstream::in);
-	
-	consolaSalida.cambiarColor(blanco);
-
-	consolaSalida.limpiarPantalla();
-
-	
-	if (!archivoMarcador.is_open()) {
-		wcout << "no se pudieron abrir los marcadores" << endl;
-		_getch();
-		return;
-	}
-
-
-	wstring linea;														//algunos caracteres son unicode, así que usaremos wstring,pero se puede usar string si no se usan signos 								
-	while (!archivoMarcador.eof()) {
-		std::getline(archivoMarcador, linea);
-		wcout << linea << endl;
-	}
-	wcout << "fin de los marcadores guardados" << endl;
-	_getch();
-
-
-}
-
 
 
 

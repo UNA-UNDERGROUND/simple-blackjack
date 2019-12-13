@@ -119,14 +119,6 @@ void juego::pantallaJuego() {
 				}
 				break;
 			}
-			case Boton5:{	// C
-				gestorPantalla.guardarMarcador(listaJugadores);
-
-				gestorPantalla.mostrarMesa();
-				gestorPantalla.mostrarInfoJugador(*jugadorActual);
-				gestorPantalla.mostrarInfoJugador(Dealer, true);
-				break;
-			}
 			case Atras:{
 
 				if (!gestorPantalla.dialogoSalida()) {
@@ -273,9 +265,6 @@ void juego::jugar() {
 			}
 
 
-		}
-		case 2:{//mostrar Marcadores
-			gestorPantalla.mostrarMarcadores();
 		}
 
 		default:
