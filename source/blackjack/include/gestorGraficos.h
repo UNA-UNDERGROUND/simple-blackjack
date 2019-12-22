@@ -17,7 +17,7 @@ private:
 	int puntoY[4] = { 15,8,15,8 };
 
 
-	color colorLuz = rojo;
+	ccolor_t colorLuz = rojo;
 	int puntosRestantes = 3; //detemina la longitud de una luz especifica
 
 

@@ -17,7 +17,7 @@ public:
 
 	//en esta funcion no ocupamos restaurar los colores a diferiencia de la original,tambien elige por defecto fondo negro
 	#ifdef WIN32
-	void cambiarColor(color texto, color fondo = negro);
+	void cambiarColor(ccolor_t texto, ccolor_t fondo = negro);
 	#endif
 
 	//nos permite mostrar/ocultar el cursor, por defecto lo muestra

@@ -33,7 +33,7 @@ void gestorConsola::gotoXY(int x, int y) {
 
 #ifdef WIN32
 //en esta funcion no ocupamos restaurar los colores a diferiencia de la original,tambien elige por defecto fondo negro
-void gestorConsola::cambiarColor(color texto, color fondo) {
+void gestorConsola::cambiarColor(ccolor_t texto, ccolor_t fondo) {
 	SetConsoleTextAttribute(salidaConsola, texto | (fondo << 4));
 }
 

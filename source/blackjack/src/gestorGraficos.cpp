@@ -376,7 +376,7 @@ void gestorGraficos::mostrarJugadorSecundario(wstring nick, std::vector<jugadorG
 		consolaSalida.gotoXY(4, posicionY);
 		wcout << "cartas:           ";
 		carta *cartaActual;
-		int numeroCartas = Actual->getMano()->getCartas();
+		size_t numeroCartas = Actual->getMano()->getCartas();
 		for (int j = 0; j < numeroCartas; j++) {
 				cartaActual = &Actual->getMano()->getCarta(j);
 				wcout << nombreCarta[cartaActual->getcodigo()] << simboloPalo[cartaActual->getPalo()];
@@ -605,7 +605,7 @@ void gestorGraficos::mostrarJugadoresSecundarios(std::vector<jugadorGenerico*>& 
 	
 	int insertados = 0;
 	int posicion = (pagina * 2);
-	int fin = jugadores.size();
+	size_t fin = jugadores.size();
 
 	#ifdef WIN32
 	consolaSalida.gotoXY(2, 3);
@@ -791,7 +791,7 @@ void gestorGraficos::mostrarFinDelJuego(std::vector<jugadorGenerico*>& jugadores
 	consolaSalida.limpiarPantalla();
 
 
-	int cantidadJugadores = jugadores.size();
+	size_t cantidadJugadores = jugadores.size();
 
 	jugadorGenerico *jugadorActual;
 	for (int i = 0; i < cantidadJugadores; i++) {

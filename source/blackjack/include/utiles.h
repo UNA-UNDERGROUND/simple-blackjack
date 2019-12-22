@@ -74,7 +74,7 @@ enum boton {
 // o desplazarlos para cambiar entre fondo y texto,pero notese que son hexadecimales y no binarios por lo tanto deben de ser desplazados 4 bits y no uno
 
 #ifdef WIN32
-enum color {
+enum ccolor_t {
 	negro			= 0,
 	azulOscuro		= FOREGROUND_BLUE,
 	verdeOscuro		= FOREGROUND_GREEN,
